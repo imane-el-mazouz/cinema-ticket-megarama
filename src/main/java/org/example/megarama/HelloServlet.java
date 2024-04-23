@@ -1,15 +1,15 @@
 package org.example.megarama;
 
-import java.io.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.HttpServletRequest;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
+public class HelloServlet {
     private String message;
 
     public void init() {
-        message = "Hello World!";
+        message = "Helolo World!";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
