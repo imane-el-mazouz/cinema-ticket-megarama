@@ -7,6 +7,6 @@
 <body>
 
 <br/>
-<a href="DisplayMovieServlet">Hello Servlet</a>
+<a href="DisplayMovieServlet">display</a>
 </body>
 </html>
