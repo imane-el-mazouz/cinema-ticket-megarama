@@ -1,58 +1,70 @@
-<%@ page import="com.movieticket.model.Movie" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 24/04/2024
-  Time: 11:55
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>List of Movies</title>
+    <style>
+        /* Style pour la liste de films */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .movie-card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .movie-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-card .card-body {
+            padding: 20px;
+        }
+
+        .movie-card h5 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .movie-card p {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>List of Movies</h1>
-<table>
-    <tr>
-        <th>Titre</th>
-        <th>Description</th>M
-    </tr>
-    <% for (Movie movie : (List<Movie>)request.getAttribute("getAllMovies")) { %>
-    <tr>
-        <td><%= movie.getTitle() %></td>
-        <td><%= movie.getDescription() %></td>
-        <td><%= movie.getGenre() %></td>
-        <td><%= movie.getLanguage() %></td>
-        <td><%= movie.getDuration() %></td>
-        <td><%= movie.getPrice() %></td>
-
-    </tr>
-    <% } %>
-</table>
+<div class="container">
+    <h1>List of Movies</h1>
+    <div class="row">
+        <c:forEach var="movie" items="${getAllMovies}">
+            <div class="col-md-4">
+                <div class="movie-card">
+                    <img src="${movie.getImg_url()}" alt="Movie Image">
+                    <div class="card-body">
+                        <h5>${movie.getTitle()}</h5>
+                        <p>${movie.getDescription()}</p>
+                        <p>Genre: ${movie.getGenre()}</p>
+                        <p>Language: ${movie.getLanguage()}</p>
+                        <p>Duration: ${movie.getDuration()}</p>
+                        <p>Price: ${movie.getPrice()}</p>
+                        <p>Rating: ${movie.getRating()}</p>
+                        <p>Number of Seats: ${movie.getNumber_of_seats()}</p>
+                        <p>Show Time: ${movie.getShow_time()}</p>
+                        <p>Show Date: ${movie.getShow_date()}</p>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</div>
 </body>
 </html>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Type</th>
-        <th>Prix</th>
-        <th>Equipements</th>
-        <th>Availaibility</th>
-        <th>Image</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="room" items="${availableRooms}">
-        <tr>
-            <td>${room.type}</td>
-            <td>${room.price}</td>
-            <td>${room.equipements}</td>
-            <td>${room.available ? 'Available' : 'Not Available'}</td>
-            <td><img src="${room.image_Path}" alt="image_path" width="100"></td>
-
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>

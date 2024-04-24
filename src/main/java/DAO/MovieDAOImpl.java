@@ -17,7 +17,7 @@ public class MovieDAOImpl implements MovieDAO {
         List<Movie> movies = new ArrayList<>();
 
         try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM movie");
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM movies");
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -25,7 +25,8 @@ public class MovieDAOImpl implements MovieDAO {
                 String img_url = resultSet.getString("img_url");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                Movie.Genre genre = Movie.Genre.valueOf(resultSet.getString("genre"));
+                String genreStr = resultSet.getString("genre").toUpperCase(); // Convertir en majuscules pour correspondre aux constantes d'énumération
+                Movie.Genre genre = Movie.Genre.valueOf(genreStr);
                 Movie.Language language = Movie.Language.valueOf(resultSet.getString("language"));
                 java.sql.Time duration = resultSet.getTime("duration");
                 int price = resultSet.getInt("price");
@@ -43,4 +44,3 @@ public class MovieDAOImpl implements MovieDAO {
         return movies;
     }
 }
-

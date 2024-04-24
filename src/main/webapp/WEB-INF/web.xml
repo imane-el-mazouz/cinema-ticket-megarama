@@ -3,4 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+    <display-name>MyCinemaApp</display-name>
+
+    <servlet>
+        <servlet-name>DisplayMovieServlet</servlet-name>
+        <servlet-class>com.servlets.DisplayMovieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayMovieServlet</servlet-name>
+        <url-pattern>/display</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>

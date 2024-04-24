@@ -2,7 +2,8 @@ package com.servlets;
 
 import DAO.MovieDAO;
 import DAO.MovieDAOImpl;
-import com.model.Movie;
+import com.movieticket.model.Movie;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
