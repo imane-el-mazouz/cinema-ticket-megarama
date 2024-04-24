@@ -17,6 +17,23 @@ public class Movie {
     private SeatNumber number_of_seats;
     private Time show_time;
     private Date show_date;
+
+    public Movie(String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, SeatNumber number_of_seats, Time show_time, Date show_date) {
+        this.img_url = img_url;
+        this.title = title;
+        this.description = description;
+        this.genre = genre;
+        this.language = language;
+        this.duration = duration;
+        this.price = price;
+        this.rating = rating;
+        this.number_of_seats = number_of_seats;
+        this.show_time = show_time;
+        this.show_date = show_date;
+    }
+
+
+
     public enum Genre {
         ACTION, COMEDY, DRAMA, HORROR, SCIENCE_FICTION, ROMANCE,
     }
