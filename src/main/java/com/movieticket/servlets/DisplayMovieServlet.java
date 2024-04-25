@@ -1,20 +1,20 @@
 package com.movieticket.servlets;
 
-import DAO.MovieDAO;
-import DAO.MovieDAOImpl;
+import com.movieticket.DAO.MovieDAO;
+import com.movieticket.DAO.MovieDAOImpl;
 import com.movieticket.model.Movie;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 @WebServlet("/DisplayMovieServlet")
 public class DisplayMovieServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
