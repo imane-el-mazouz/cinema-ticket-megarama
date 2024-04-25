@@ -60,6 +60,7 @@ public class AddMovieServlet extends HttpServlet {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add movie.");
             request.getRequestDispatcher("").forward(request, response);
+            ////
         }
     }
 }
