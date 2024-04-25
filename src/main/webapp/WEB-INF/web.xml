@@ -8,7 +8,7 @@
     <servlet>
         <servlet-name>DisplayMovieServlet</servlet-name>
         <servlet-class>com.movieticket.servlets.DisplayMovieServlet</servlet-class>
-    </servlet>gi
+    </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMovieServlet</servlet-name>
         <url-pattern>/display</url-pattern>

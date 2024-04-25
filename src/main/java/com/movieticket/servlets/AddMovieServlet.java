@@ -4,13 +4,17 @@ import com.movieticket.DAO.MovieDAO;
 import com.movieticket.DAO.MovieDAOImpl;
 import com.movieticket.model.Movie;
 
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/AddMovieServlet")
 public class AddMovieServlet extends HttpServlet {
@@ -23,7 +27,7 @@ public class AddMovieServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/WEB-INF/add_movie.jsp");
+        request.getRequestDispatcher("/WEB-INF/add_movie.jsp").forward((ServletRequest) request, (ServletResponse) response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,5 +61,3 @@ public class AddMovieServlet extends HttpServlet {
         }
     }
 }
-
-

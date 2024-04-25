@@ -7,15 +7,15 @@
 
     <servlet>
         <servlet-name>DisplayMovieServlet</servlet-name>
-        <servlet-class>com.servlets.DisplayMovieServlet</servlet-class>
-    </servlet>gi
+        <servlet-class>com.movieticket.servlets.DisplayMovieServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMovieServlet</servlet-name>
         <url-pattern>/display</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AddMovieServlet</servlet-name>
-        <servlet-class>com.servlets.AddMovieServlet</servlet-class>
+        <servlet-class>com.movieticket.servlets.AddMovieServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddMovieServlet</servlet-name>
