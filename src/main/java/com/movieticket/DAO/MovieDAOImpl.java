@@ -1,6 +1,6 @@
-package DAO;
+package com.movieticket.DAO;
 
-import Connection.DatabaseManager;
+import com.Connection.DatabaseManager;
 import com.movieticket.model.Movie;
 
 import java.sql.Connection;
@@ -43,4 +43,30 @@ public class MovieDAOImpl implements MovieDAO {
         }
         return movies;
     }
+    public void addMovie(Movie movie) throws SQLException {
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "INSERT INTO movies (movie_id, img_url, title, description, genre, language, duration, price, rating, number_of_seats, show_time, show_date) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+
+            statement.setInt(1, movie.getMovie_id());
+            statement.setString(2, movie.getImg_url());
+            statement.setString(3, movie.getTitle());
+            statement.setString(4, movie.getDescription());
+            statement.setString(5, movie.getGenre().toString());
+            statement.setString(6, movie.getLanguage().toString());
+            statement.setTime(7, movie.getDuration());
+            statement.setInt(8, movie.getPrice());
+            statement.setInt(9, movie.getRating());
+            statement.setString(10, movie.getNumber_of_seats().toString());
+            statement.setTime(11, movie.getShow_time());
+            statement.setDate(12, movie.getShow_date());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
 }
+

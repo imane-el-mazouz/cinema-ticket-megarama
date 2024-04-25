@@ -1,4 +1,4 @@
-package DAO;
+package com.movieticket.DAO;
 
 import com.movieticket.model.Movie;
 
@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface MovieDAO {
     List<Movie> getAllMovies() throws SQLException;
+    void addMovie(Movie movie) throws SQLException;
+
 
 }

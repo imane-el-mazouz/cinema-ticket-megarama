@@ -1,7 +1,7 @@
 package com.movieticket.servlets;
 
-import DAO.MovieDAO;
-import DAO.MovieDAOImpl;
+import com.movieticket.DAO.MovieDAO;
+import com.movieticket.DAO.MovieDAOImpl;
 import com.movieticket.model.Movie;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
