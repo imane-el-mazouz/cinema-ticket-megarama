@@ -9,6 +9,7 @@
 <br/>
 <a href="DisplayMovieServlet">display</a>
 <a href="AddMovieServlet">add</a>
+<a href="DeleteMovieServlet">delete</a>
 
 </body>
 </html>

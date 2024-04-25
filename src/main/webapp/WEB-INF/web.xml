@@ -22,6 +22,15 @@
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteMovieServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.AddMovieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteMovieServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

@@ -45,6 +45,7 @@ public class MovieDAOImpl implements MovieDAO {
         }
         return movies;
     }
+
     @Override
     public void addMovie(Movie movie) throws SQLException {
         try (Connection connection = DatabaseManager.getConnection();
@@ -69,5 +70,17 @@ public class MovieDAOImpl implements MovieDAO {
             throw e;
         }
     }
+
+    @Override
+    public void deleteMovie(int movieId) throws SQLException {
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM movies WHERE movie_id = ?")) {
+            statement.setInt(1, movieId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
 
 }
