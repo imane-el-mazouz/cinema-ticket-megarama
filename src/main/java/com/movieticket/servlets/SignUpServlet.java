@@ -1,7 +1,7 @@
 package com.movieticket.servlets;
 
-import com.movieticket.DAO.UserDAO;
-import com.movieticket.DAO.UserDAOImpl;
+import com.movieticket.dao.UserDAO;
+import com.movieticket.dao.UserDAOImpl;
 import com.movieticket.model.User;
 import com.movieticket.model.UserRole;
 

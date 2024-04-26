@@ -1,7 +1,7 @@
 package com.movieticket.servlets;
 
-import com.movieticket.DAO.UserDAO;
-import com.movieticket.DAO.UserDAOImpl;
+import com.movieticket.dao.UserDAO;
+import com.movieticket.dao.UserDAOImpl;
 import com.movieticket.model.User;
 import com.movieticket.model.UserRole;
 
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                 if (user.getRole() == UserRole.admin) {
                     response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/display");
+                    response.sendRedirect(request.getContextPath() + "/movies");
                 }
             } else {
                 request.setAttribute("error", "Invalid username or password. Please try again.");
