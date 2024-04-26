@@ -15,14 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/")
 public class MoviesServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Movie> movies = getMoviesFromDatabase(); // Fetch movie data from the database
 
         request.setAttribute("movies", movies);
-        request.getRequestDispatcher("dashbord.jsp").forward(request, response);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     private List<Movie> getMoviesFromDatabase() {

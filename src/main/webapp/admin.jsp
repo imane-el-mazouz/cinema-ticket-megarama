@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.movieticket.model.Movie" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -25,7 +26,7 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="index.html">
+				<a href="admin.jsp">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
@@ -104,7 +105,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="index.html">Admin Mangement</a>
+							<a class="active" href="admin.jsp">Admin Mangement</a>
 						</li>
 					</ul>
 				</div>
@@ -146,36 +147,27 @@
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
-					<table>
-							<thead>
+					<body>
+						<h1>Movie List</h1>
+						  <table>
 							<tr>
-								<th>Movie</th>
-								<th>Genre</th>
-								<th>Show time</th>
-								<th>Action</th>
-								<th>Action</th>
+							<th>Image</th>
+							<th>Title</th>
+							<th>Genre</th>
+							<th>Show Date</th>
+
 							</tr>
-							</thead>
-							<tbody>
-							<%
-								List<Movie> movies = (List<Movie>) request.getAttribute("movies");
-								for (Movie movie : movies) {
-							%>
+						<c:forEach var="movie" items="${movies}">
 							<tr>
-								<td>
-									<img src="img/people.png">
-									<p><%= movie.getTitle() %></p>
-								</td>
-								<td><%= movie.getGenre() %></td>
-								<td><%= movie.getShow_date() %></td>
-								<td><button class="status pending">Delete</button></td>
-								<td><button class="status completed">Update</button></td>
+								<td><img src="${movie.imgUrl}" alt="${movie.title}"></td>
+								<td>${movie.title}</td>
+								<td>${movie.genre}</td>
+								<td>${movie.showDate}</td>
+
 							</tr>
-							<%
-								}
-							%>
-							</tbody>
-						</table>
+						</c:forEach>
+					   </table>
+					</body>
 				</div>
 			</div>
 
