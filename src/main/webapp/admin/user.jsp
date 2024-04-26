@@ -23,7 +23,7 @@
 	</a>
 	<ul class="side-menu top">
 		<li class="active">
-			<a href="admin.jsp">
+			<a href="dashboard.jsp">
 				<i class='bx bxs-dashboard' ></i>
 				<span class="text">Dashboard</span>
 			</a>
@@ -86,7 +86,7 @@
 			<span class="num">8</span>
 		</a>
 		<a href="#" class="profile">
-			<img src="img/people.png">
+			<img src="../img/people.png">
 		</a>
 	</nav>
 	<!-- NAVBAR -->
@@ -158,7 +158,7 @@
 					<tbody>
 					<tr>
 						<td>
-							<img src="img/people.png">
+							<img src="../img/people.png">
 							<p>Chaimaa</p>
 						</td>
 						<td>user@gmail.com</td>
@@ -170,7 +170,7 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="img/people.png">
+							<img src="../img/people.png">
 							<p>Imane</p>
 						</td>
 						<td>user@gmail.com</td>
@@ -180,7 +180,7 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="img/people.png">
+							<img src="../img/people.png">
 							<p>Nabil</p>
 						</td>
 						<td>user@gmail.com</td>
@@ -190,7 +190,7 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="img/people.png">
+							<img src="../img/people.png">
 							<p>Said</p>
 						</td>
 						<td>user@gmail.com</td>
@@ -200,7 +200,7 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="img/people.png">
+							<img src="../img/people.png">
 							<p>Mohamed</p>
 						</td>
 						<td>user@gmail.com</td>

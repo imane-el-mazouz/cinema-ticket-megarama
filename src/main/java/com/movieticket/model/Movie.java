@@ -32,11 +32,11 @@ public class Movie {
         this.show_date = show_date;
     }
 
-    public Movie(String imgUrl, String title, Genre genre, Date showDate) {
+    public Movie(String imgUrl, String title, String genre, String showDate) {
         this.img_url = imgUrl;
         this.title = title;
-        this.genre = genre;
-        this.show_date = showDate;
+        this.genre = Genre.valueOf(genre);
+        this.show_date = Date.valueOf(showDate);
     }
 
 
