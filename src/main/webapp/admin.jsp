@@ -17,7 +17,7 @@
 <body>
 
 
-	<!-- SIDEBAR -->
+	<!-- SIDEBAR  new version-->
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
