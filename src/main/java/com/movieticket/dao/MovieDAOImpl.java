@@ -1,4 +1,4 @@
-package com.movieticket.DAO;
+package com.movieticket.dao;
 
 
 
@@ -27,17 +27,16 @@ public class MovieDAOImpl implements MovieDAO {
                 String img_url = resultSet.getString("img_url");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                String genreStr = resultSet.getString("genre").toUpperCase(); // Convertir en majuscules pour correspondre aux constantes d'énumération
-                Movie.Genre genre = Movie.Genre.valueOf(genreStr);
+                Movie.Genre genreStr = Movie.Genre.valueOf(resultSet.getString("genre").toUpperCase());
                 Movie.Language language = Movie.Language.valueOf(resultSet.getString("language"));
                 java.sql.Time duration = resultSet.getTime("duration");
                 int price = resultSet.getInt("price");
                 int rating = resultSet.getInt("rating");
-                Movie.SeatNumber number_of_seats = Movie.SeatNumber.valueOf(resultSet.getString("number_of_seats"));
+                int number_of_seats = resultSet.getInt("number_of_seats");
                 java.sql.Time show_time = resultSet.getTime("show_time");
                 java.sql.Date show_date = resultSet.getDate("show_date");
 
-                Movie movie = new Movie(movie_id, img_url, title, description, genre, language, duration, price, rating, number_of_seats, show_time, show_date);
+                Movie movie = new Movie(movie_id, img_url, title, description, genreStr, language, duration, price, rating, number_of_seats, show_time, show_date);
                 movies.add(movie);
             }
         } catch (SQLException e) {
@@ -60,7 +59,7 @@ public class MovieDAOImpl implements MovieDAO {
             statement.setTime(6, movie.getDuration());
             statement.setInt(7, movie.getPrice());
             statement.setInt(8, movie.getRating());
-            statement.setString(9, movie.getNumber_of_seats().toString());
+            statement.setInt(9, movie.getNumber_of_seats());
             statement.setTime(10, movie.getShow_time());
             statement.setDate(11, movie.getShow_date());
 

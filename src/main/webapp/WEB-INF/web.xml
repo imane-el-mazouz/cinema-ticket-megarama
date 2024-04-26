@@ -20,12 +20,27 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMovieServlet</servlet-name>
-        <url-pattern>/display</url-pattern>
+        <url-pattern>/movies</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReservationServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.ReservationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReservationServlet</servlet-name>
+        <url-pattern>/user/reserve</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>AddMovieServlet</servlet-name>
-        <servlet-class>com.movieticket.servlets.AddMovieServlet</servlet-class>
+        <servlet-class>com.movieticket.servlets.admin.AddMovieServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>AddMovieServlet</servlet-name>
+        <url-pattern>/admin/add</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.movieticket.servlets.LoginServlet</servlet-class>
@@ -35,13 +50,12 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddMovieServlet</servlet-name>
-        <url-pattern>/add</url-pattern>
-    </servlet-mapping>
+
+
+
 
     <welcome-file-list>
-        <welcome-file>login</welcome-file>
+        <welcome-file>movies</welcome-file>
     </welcome-file-list>
 
 

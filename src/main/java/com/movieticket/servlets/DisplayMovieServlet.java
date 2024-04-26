@@ -1,7 +1,7 @@
 package com.movieticket.servlets;
 
-import com.movieticket.DAO.MovieDAO;
-import com.movieticket.DAO.MovieDAOImpl;
+import com.movieticket.dao.MovieDAO;
+import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
 
 
@@ -15,10 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-@WebServlet("/DisplayMovieServlet")
 public class DisplayMovieServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private MovieDAO movieDAO;
+    private final MovieDAO movieDAO;
 
     public DisplayMovieServlet() {
         super();
@@ -30,7 +29,7 @@ public class DisplayMovieServlet extends HttpServlet {
         try {
             List<Movie> getAllMovies = movieDAO.getAllMovies();
             request.setAttribute("getAllMovies", getAllMovies);
-            request.getRequestDispatcher("/displayMovies.jsp").forward((ServletRequest) request, (ServletResponse) response);
+            request.getRequestDispatcher("/movies.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("");

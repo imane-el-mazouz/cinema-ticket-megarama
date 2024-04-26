@@ -1,4 +1,4 @@
-package com.movieticket.DAO;
+package com.movieticket.dao;
 
 import com.Connection.DatabaseManager;
 import com.movieticket.model.User;
