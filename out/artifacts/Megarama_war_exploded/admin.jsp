@@ -10,7 +10,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/style.css">
+	<style><%@include file ="dashbord.css"%></style>
 
 	<title>AdminHub</title>
 </head>
@@ -44,7 +44,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="user.html">
+				<a href="user.jsp">
 					<i class='bx bxs-group' ></i>
 					<span  class="text">User</span>
 				</a>
@@ -147,17 +147,6 @@
 						<i class='bx bx-filter' ></i>
 					</div>
 					<table>
-						<thead>
-							<tr>
-								<th>Movie</th>
-								<th>Genre</th>
-								<th>Show time</th>
-								<th>Action</th>
-								<th>Action</th>
-
-							</tr>
-						</thead>
-						<table>
 							<thead>
 							<tr>
 								<th>Movie</th>
@@ -168,28 +157,34 @@
 							</tr>
 							</thead>
 							<tbody>
-							<% for (Movie movie : (List<Movie>) request.getAttribute("movies")) { %>
+							<%
+								List<Movie> movies = (List<Movie>) request.getAttribute("movies");
+								for (Movie movie : movies) {
+							%>
 							<tr>
 								<td>
-									<img src="<%= movie.getImg_url() %>">
+									<img src="img/people.png">
 									<p><%= movie.getTitle() %></p>
 								</td>
 								<td><%= movie.getGenre() %></td>
-								<td>01-10-2021</td>
+								<td><%= movie.getShow_date() %></td>
 								<td><button class="status pending">Delete</button></td>
 								<td><button class="status completed">Update</button></td>
 							</tr>
-							<% } %>
+							<%
+								}
+							%>
 							</tbody>
 						</table>
 				</div>
+			</div>
 
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
 
-	<script src="script.js"></script>
+
+	<script><%@include file ="script.js"%></script>
 </body>
 </html>

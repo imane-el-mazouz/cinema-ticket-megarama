@@ -7,7 +7,8 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="style.css">
+	<style><%@include file ="dashbord.css"%></style>
+
 
 	<title>AdminHub</title>
 </head>
@@ -22,7 +23,7 @@
 	</a>
 	<ul class="side-menu top">
 		<li class="active">
-			<a href="index.jsp">
+			<a href="admin.jsp">
 				<i class='bx bxs-dashboard' ></i>
 				<span class="text">Dashboard</span>
 			</a>
@@ -210,6 +211,7 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
 
 	</main>
 	<!-- MAIN -->
@@ -217,6 +219,6 @@
 <!-- CONTENT -->
 
 
-<script src="script.js"></script>
+<script><%@include file ="script.js"%></script>
 </body>
 </html>
