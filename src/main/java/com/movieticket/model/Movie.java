@@ -14,45 +14,18 @@ public class Movie {
     private Time duration;
     private int price;
     private int rating;
-    private SeatNumber number_of_seats;
+    private int number_of_seats;
     private Time show_time;
     private Date show_date;
-
-    public Movie(String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, SeatNumber number_of_seats, Time show_time, Date show_date) {
-        this.img_url = img_url;
-        this.title = title;
-        this.description = description;
-        this.genre = genre;
-        this.language = language;
-        this.duration = duration;
-        this.price = price;
-        this.rating = rating;
-        this.number_of_seats = number_of_seats;
-        this.show_time = show_time;
-        this.show_date = show_date;
-    }
-
-    public Movie(String imgUrl, String title, String genre, String showDate) {
-        this.img_url = imgUrl;
-        this.title = title;
-        this.genre = Genre.valueOf(genre);
-        this.show_date = Date.valueOf(showDate);
-    }
-
-
     public enum Genre {
-        ACTION, COMEDY, DRAMA, HORROR, SCIENCE_FICTION, ROMANCE,
+        ACTION, COMEDY, DRAMA, HORROR, SCIENCE, ROMANCE,
     }
 
-public enum Language{
+    public enum Language{
         ar, en, fr,
-}
-public enum SeatNumber{
-        A, B, C, D, E, F ,G, H, I, J ,K, L , M, N, O, P, Q, R, S, T,
+    }
 
-}
-
-    public Movie(int movie_id, String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, SeatNumber number_of_seats, Time show_time, Date show_date) {
+    public Movie(int movie_id, String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int number_of_seats, Time show_time, Date show_date) {
         this.movie_id = movie_id;
         this.img_url = img_url;
         this.title = title;
@@ -66,7 +39,23 @@ public enum SeatNumber{
         this.show_time = show_time;
         this.show_date = show_date;
     }
-   //Getters
+
+
+    public Movie(String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int number_of_seats, Time show_time, Date show_date) {
+
+        this.img_url = img_url;
+        this.title = title;
+        this.description = description;
+        this.genre = genre;
+        this.language = language;
+        this.duration = duration;
+        this.price = price;
+        this.rating = rating;
+        this.number_of_seats = number_of_seats;
+        this.show_time = show_time;
+        this.show_date = show_date;
+    }
+    //Getters
     public int getMovie_id() {
         return movie_id;
     }
@@ -98,7 +87,7 @@ public enum SeatNumber{
         return rating;
     }
 
-    public SeatNumber getNumber_of_seats() {
+    public int getNumber_of_seats() {
         return number_of_seats;
     }
 
@@ -157,7 +146,7 @@ public enum SeatNumber{
 
 
 
-    public void setNumber_of_seats(SeatNumber number_of_seats) {
+    public void setNumber_of_seats(int number_of_seats) {
         this.number_of_seats = number_of_seats;
     }
 
@@ -172,3 +161,4 @@ public enum SeatNumber{
         this.show_date = show_date;
     }
 }
+
