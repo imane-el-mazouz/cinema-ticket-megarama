@@ -30,10 +30,9 @@ public class MovieDetailsServlet extends HttpServlet {
 
             List<Movie> getAllMovies = movieDAO.getAllMovies();
             request.setAttribute("getAllMovies", getAllMovies);
-            request.getRequestDispatcher("/movies-details.jsp").forward(request, response);
+            request.getRequestDispatcher("/movie-details.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("");
         }
     }
 

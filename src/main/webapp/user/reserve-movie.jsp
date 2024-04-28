@@ -12,7 +12,7 @@
 <div class="movie-container">
     <label>Pick a movie:</label>
     <select id="movie">
-            <option value="${price}">${name} ($${price})</option>
+        <option value="${price}">${name} ($${price})</option>
     </select>
 </div>
 

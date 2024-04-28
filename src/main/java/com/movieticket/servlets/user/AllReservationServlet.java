@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,10 +30,9 @@ public class AllReservationServlet extends HttpServlet {
     }
 
     protected void doPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int userId = Integer.parseInt(request.getParameter("userId"));
-
-        List<Reservation> previousReservations = reservationDAO.getPreviousReservations(userId);
+        HttpSession session = request.getSession();
+        Integer userID = (Integer) session.getAttribute("userID");
+        List<Reservation> previousReservations = reservationDAO.getPreviousReservations(userID);
         request.setAttribute("previousReservations", previousReservations);
         request.getRequestDispatcher("/user/reservation-history.jsp").forward(request, response);
     }

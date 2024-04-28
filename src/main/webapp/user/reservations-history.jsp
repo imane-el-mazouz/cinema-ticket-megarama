@@ -26,11 +26,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h5 class="card-title fw-bold fs-3">Reservation ID: ${reservation.reservation_id}</h5>
+                                <h5 class="card-title fw-bold fs-3">Reservation ID: ${reservation.getReservationId()}</h5>
                             </div>
-                            <p class="card-text">Room ID: ${reservation.movie_id}</p>
-                            <p class="card-text">Start Date: ${reservation.number_of_tickets}</p>
-                            <p class="card-text">End Date: ${reservation.price_total}</p>
+                            <p class="card-text">Room ID: ${reservation.getMovieId()}</p>
+                            <p class="card-text">Start Date: ${reservation.getSelectedSeats()}</p>
+                            <p class="card-text">End Date: ${reservation.getPriceTotal()}</p>
                         </div>
 
                     </div>

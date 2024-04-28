@@ -35,17 +35,17 @@ public class ReservationServlet extends HttpServlet {
         int movieId = Integer.parseInt(request.getParameter("movieId"));
 
         List<AvailableSeat> availableSeats = availableSeatDAO.getAllSeats().stream()
-                    .filter(seat -> seat.getMovieId() == movieId) .collect(Collectors.toList());
+                .filter(seat -> seat.getMovieId() == movieId) .collect(Collectors.toList());
 
 
-            int price = movieDAO.getPrice(movieId);
-            request.setAttribute("price", price);
-            String name = movieDAO.getName(movieId);
-            request.setAttribute("name", name);
-            request.setAttribute("userId", userId);
-            request.setAttribute("movieId", movieId);
-            request.setAttribute("availableSeats", availableSeats);
-            request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
+        int price = movieDAO.getPrice(movieId);
+        request.setAttribute("price", price);
+        String name = movieDAO.getName(movieId);
+        request.setAttribute("name", name);
+        request.setAttribute("userId", userId);
+        request.setAttribute("movieId", movieId);
+        request.setAttribute("availableSeats", availableSeats);
+        request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
 
     }
 

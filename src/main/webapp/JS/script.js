@@ -12,18 +12,12 @@ const overlay = document.querySelector("[data-overlay]");
 const navElemArr = [navOpenBtn, navCloseBtn, overlay];
 
 for (let i = 0; i < navElemArr.length; i++) {
-
     navElemArr[i].addEventListener("click", function () {
-
         navbar.classList.toggle("active");
         overlay.classList.toggle("active");
         document.body.classList.toggle("active");
-
     });
-
 }
-
-
 
 /**
  * header sticky
@@ -32,12 +26,8 @@ for (let i = 0; i < navElemArr.length; i++) {
 const header = document.querySelector("[data-header]");
 
 window.addEventListener("scroll", function () {
-
     window.scrollY >= 10 ? header.classList.add("active") : header.classList.remove("active");
-
 });
-
-
 
 /**
  * go top
@@ -46,15 +36,15 @@ window.addEventListener("scroll", function () {
 const goTopBtn = document.querySelector("[data-go-top]");
 
 window.addEventListener("scroll", function () {
-
     window.scrollY >= 500 ? goTopBtn.classList.add("active") : goTopBtn.classList.remove("active");
-
 });
 
-// Mettre à jour le prix total lorsque l'utilisateur sélectionne ou désélectionne un siège
-//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+/**
+ * Update the total price when the user selects or deselects a seat
+ */
+
 const container = document.querySelector('.container-reserve');
-const seats = document.querySelectorAll('.row-reserve .seat:not(.occupied');
+const seats = document.querySelectorAll('.row-reserve .seat:not(.occupied)');
 const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
@@ -71,14 +61,8 @@ function setMovieData(movieIndex, moviePrice) {
 // update total and count
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row-reserve .seat.selected');
-
     const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
-
     localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-
-    //copy selected seats into arr
-    // map through array
-    //return new array of indexes
 
     const selectedSeatsCount = selectedSeats.length;
 
@@ -115,14 +99,8 @@ movieSelect.addEventListener('change', (e) => {
 container.addEventListener('click', (e) => {
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
         e.target.classList.toggle('selected');
-
         updateSelectedCount();
     }
 });
 
 updateSelectedCount();
-
-/* ::::::::::::::::::::::::::::::::carsol::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-
-
-
