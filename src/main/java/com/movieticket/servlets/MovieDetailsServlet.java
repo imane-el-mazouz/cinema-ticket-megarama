@@ -26,6 +26,7 @@ public class MovieDetailsServlet extends HttpServlet {
             int movieId = Integer.parseInt(request.getParameter("movieId"));
             Movie selectedMovie = movieDAO.getMovieById(movieId);
             request.setAttribute("selectedMovie", selectedMovie);
+            
 
             List<Movie> getAllMovies = movieDAO.getAllMovies();
             request.setAttribute("getAllMovies", getAllMovies);
