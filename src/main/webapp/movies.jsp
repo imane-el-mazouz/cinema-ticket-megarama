@@ -44,8 +44,8 @@
                 <ion-icon name="search-outline"></ion-icon>
             </button>
 
-
-            <button class="btn btn-primary"><a href=""></a> Sign in</button>
+q
+            <button class="btn btn-primary"><a href="login.jsp">Sign in</a> </button>
 
         </div>
 
@@ -74,7 +74,7 @@
                 </li>
 
                 <li>
-                    <a href="DisplayMovieServlet" class="navbar-link">Movie</a>
+                    <a href="movies.jsp" class="navbar-link">Movie</a>
                 </li>
 
                 <li>
