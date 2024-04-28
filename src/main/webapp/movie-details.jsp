@@ -155,105 +155,61 @@
 <main>
     <article>
 
-        <!--
-          - #MOVIE DETAIL
-        -->
-
         <section class="movie-detail">
             <div class="container">
-
                 <figure class="movie-detail-banner">
-
-                    <img src="./assets/images/movie-4.png" alt="Free guy movie poster">
-
+                    <img src="${selectedMovie.getImgUrl()}" alt="${selectedMovie.getTitle()} poster">
                     <button class="play-btn">
                         <ion-icon name="play-circle-outline"></ion-icon>
                     </button>
-
                 </figure>
-
                 <div class="movie-detail-content">
-
                     <p class="detail-subtitle">New Episodes</p>
-
-                    <h1 class="h1 detail-title">
-                        Free <strong>Guy</strong>
-                    </h1>
-
+                    <h1 class="h1 detail-title">${selectedMovie.getTitle()}</h1>
                     <div class="meta-wrapper">
-
                         <div class="badge-wrapper">
                             <div class="badge badge-fill">PG 13</div>
-
                             <div class="badge badge-outline">HD</div>
                         </div>
-
                         <div class="ganre-wrapper">
-                            <a href="#">Comedy,</a>
-
-                            <a href="#">Action,</a>
-
-                            <a href="#">Adventure,</a>
-
-                            <a href="#">Science Fiction</a>
+                            <c:forEach var="genre" items="${selectedMovie.getGenres()}">
+                                <a href="#">${genre}</a>
+                            </c:forEach>
                         </div>
-
                         <div class="date-time">
-
                             <div>
                                 <ion-icon name="calendar-outline"></ion-icon>
-
-                                <time datetime="2021">2021</time>
+                                <time datetime="${selectedMovie.getReleaseYear()}">${selectedMovie.getReleaseYear()}</time>
                             </div>
-
                             <div>
                                 <ion-icon name="time-outline"></ion-icon>
-
-                                <time datetime="PT115M">115 min</time>
+                                <time datetime="${selectedMovie.getDuration()}">${selectedMovie.getDuration()}</time>
                             </div>
-
                         </div>
-
                     </div>
-
-                    <p class="storyline">
-                        A bank teller called Guy realizes he is a background character in an open world video game called Free
-                        City that will
-                        soon go offline.
-                    </p>
-
+                    <p class="storyline">${selectedMovie.getDescription()}</p>
                     <div class="details-actions">
-
                         <button class="share">
                             <ion-icon name="share-social"></ion-icon>
-
                             <span>Share</span>
                         </button>
-
                         <div class="title-wrapper">
-                            <p class="title">Prime Video</p>
-
+                            <p class="title">${selectedMovie.getProvider()}</p>
                             <p class="text">Streaming Channels</p>
                         </div>
-
                         <button class="btn btn-primary">
                             <ion-icon name="play"></ion-icon>
-
                             <span>Watch Now</span>
                         </button>
-
                     </div>
-
-                    <a href="./assets/images/movie-4.png" download class="download-btn">
+                    <a href="${selectedMovie.getImgUrl()}" download class="download-btn">
                         <span>Download</span>
-
                         <ion-icon name="download-outline"></ion-icon>
                     </a>
-
                 </div>
-
             </div>
         </section>
+
 
 
 
@@ -271,42 +227,42 @@
                 <h2 class="h2 section-title">World Best TV Series</h2>
 
                 <ul class="movies-list">
+                    <c:forEach var="movie" items="${getAllMovies}">
+                        <li>
+                            <div class="movie-card">
 
-                    <li>
-                        <div class="movie-card">
-
-                            <a href="./movie-details.html">
-                                <figure class="card-banner">
-                                    <img src="./assets/images/series-1.png" alt="Moon Knight movie poster">
-                                </figure>
-                            </a>
-
-                            <div class="title-wrapper">
                                 <a href="./movie-details.html">
-                                    <h3 class="card-title">Moon Knight</h3>
+                                    <figure class="card-banner">
+                                        <img src="${movie.getImgUrl()}" alt="${movie.getTitle()} ">
+                                    </figure>
                                 </a>
 
-                                <time datetime="2022">2022</time>
-                            </div>
+                                <div class="title-wrapper">
+                                    <a href="./movie-details.html">
+                                        <h3 class="card-title">${movie.getTitle()} </h3>
+                                    </a>
 
-                            <div class="card-meta">
-                                <div class="badge badge-outline">2K</div>
-
-                                <div class="duration">
-                                    <ion-icon name="time-outline"></ion-icon>
-
-                                    <time datetime="PT47M">47 min</time>
+                                    <time datetime="${movie.getTitle()} ">${movie.getTitle()} </time>
                                 </div>
 
-                                <div class="rating">
-                                    <ion-icon name="star"></ion-icon>
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">${movie.getPrice()}</div>
 
-                                    <data>8.6</data>
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="${movie.getDuration()}">${movie.getDuration()}</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>${movie.getRating()}</data>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </li>
+                        </li>
+                    </c:forEach>
 
                 </ul>
 

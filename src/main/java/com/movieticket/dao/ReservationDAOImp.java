@@ -12,32 +12,58 @@ import com.movieticket.model.Movie;
 import com.movieticket.model.Reservation;
 
 public class ReservationDAOImp implements ReservationDAO {
-    Reservation reservation = new Reservation();
+
     @Override
-    public void AddNewReservation(Reservation reservation) {
-    	String sql = "INSERT INTO reservations (user_id, movie_id, number_of_tickets, price_total) VALUES (?, ?, ?, ?)";
+    public int calculatePrice(int movieId, int numberOfSeats) {
+        int pricePerSeat = 0;
+        String sql = "SELECT price FROM movies WHERE movie_id = ?";
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, reservation.getUserId());
-            statement.setInt(2, reservation.getMovieId());
-            statement.setString(3, reservation.getNumberOfTickets().toString());
-            statement.setInt(4, reservation.getPriceTotal());
+            statement.setInt(1, movieId);
+            ResultSet resultSet = statement.executeQuery();
 
-            statement.executeUpdate();
-            System.out.println("Reservation added successfully.");
+            pricePerSeat = resultSet.getInt("price");
 
         } catch (SQLException e) {
-            System.err.println("Error adding reservation: " + e.getMessage());
+            e.printStackTrace();
         }
+        int totalPrice = pricePerSeat * numberOfSeats;
+        return totalPrice;
+    }
+
+    @Override
+    public int getSeatId(Connection conn, int movieId, String seatNumber) throws SQLException {
+        String sql = "SELECT available_seat_id FROM available_seats WHERE movie_id = ? AND seat_number = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, movieId);
+            statement.setString(2, seatNumber);
+            try (var resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("available_seat_id");
+                } else {
+                    return -1; // Seat not available
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean makeReservation(Reservation reservation) {
+        String sql = "INSERT INTO reservations (user_id, movie_id, seat_id, price_total) VALUES (?, ?, ?, ?)";
+
+
+        return false;
     }
 
     @Override
     public List<Reservation> getPreviousReservations(int userId) {
         List<Reservation> reservations = new ArrayList<>();
-        String sql = "SELECT * FROM reservations WHERE user_id = ?";
-
+        String sql = "SELECT r.*, GROUP_CONCAT(a.seat_number) AS reserved_seats " +
+                "FROM reservations r " +
+                "JOIN available_seats a ON r.seat_id = a.available_seat_id " +
+                "WHERE r.user_id = ?";
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -47,10 +73,11 @@ public class ReservationDAOImp implements ReservationDAO {
             while (resultSet.next()) {
                 int reservationId = resultSet.getInt("reservation_id");
                 int movieId  = resultSet.getInt("movie_id");
-                Reservation.SeatNumber numberOfTickets = Reservation.SeatNumber.valueOf(resultSet.getString("number_of_seats"));
+                String reservedSeatNumbers = resultSet.getString("reserved_seats");
                 int priceTotal  = resultSet.getInt("price_total");
 
-                Reservation reservation = new Reservation(reservationId, userId, movieId, numberOfTickets, priceTotal);
+                String[] reservedSeatNumbersArray = reservedSeatNumbers.split(",");
+                Reservation reservation = new Reservation(reservationId, userId, movieId, reservedSeatNumbersArray, priceTotal);
                 reservations.add(reservation);
             }
         } catch (SQLException e) {
@@ -59,4 +86,6 @@ public class ReservationDAOImp implements ReservationDAO {
 
         return reservations;
     }
+
+
 }

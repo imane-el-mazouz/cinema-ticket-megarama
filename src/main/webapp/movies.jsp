@@ -45,7 +45,7 @@
             </button>
 
 
-            <button class="btn btn-primary"><a href=""></a> Sign in</button>
+            <button class="btn btn-primary"><a href="login">Sign in</a> </button>
 
         </div>
 
@@ -74,11 +74,15 @@
                 </li>
 
                 <li>
-                    <a href="DisplayMovieServlet" class="navbar-link">Movie</a>
+                    <a href="movies" class="navbar-link">Movie</a>
                 </li>
 
                 <li>
-                    <a href="user/reserve?action=showReservation&userId=1" class="navbar-link">All Reservation</a>
+                    <a href="user/reserve" class="navbar-link">Booking movie</a>
+                </li>
+
+                <li>
+                    <a href="user/reservations" class="navbar-link">All Reservation</a>
                 </li>
 
 
@@ -131,6 +135,80 @@
 
 <main>
     <article>
+
+        <!--
+          - #Rating MOVIE
+        -->
+
+        <section class="top-rated">
+            <div class="container">
+
+                <p class="section-subtitle">Online Streaming</p>
+
+                <h2 class="h2 section-title">Top Rated Movies</h2>
+
+                <ul class="filter-list">
+
+                    <li>
+                        <button class="filter-btn">Movies</button>
+                    </li>
+
+                    <li>
+                        <button class="filter-btn">TV Shows</button>
+                    </li>
+
+                    <li>
+                        <button class="filter-btn">Documentary</button>
+                    </li>
+
+                    <li>
+                        <button class="filter-btn">Sports</button>
+                    </li>
+
+                </ul>
+
+                <ul class="movies-list">
+                    <c:forEach var="movie" items="${ratingMovies}">
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="details?movieId=${movie.getId()}">
+                                    <figure class="card-banner">
+                                        <img src="${movie.getImgUrl()}" alt="${movie.getTitle()}">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="details?movieId=${movie.getId()}">
+                                        <h3 class="card-title">${movie.getTitle()}</h3>
+                                    </a>
+
+                                    <time datetime="${movie.getTitle()}">${movie.getTitle()}</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">${movie.getPrice()}$</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT122M">122 min</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>${movie.getRating()}</data>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </section>
+
         <!--
           - #ALL MOVIE
         -->
@@ -147,14 +225,14 @@
                         <li>
                             <div class="movie-card">
 
-                                <a href="./movie-details.html">
+                                <a href="details">
                                     <figure class="card-banner">
-                                        <img src="${movie.getImg_url()}" alt="${movie.getTitle()} ">
+                                        <img src="${movie.getImgUrl()}" alt="${movie.getTitle()} ">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
-                                    <a href="./movie-details.html">
+                                    <a href="details">
                                         <h3 class="card-title">${movie.getTitle()} </h3>
                                     </a>
 
