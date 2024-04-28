@@ -1,23 +1,21 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Box icons -->
-    <link href='https://onpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../CSS/dashbord.css">
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+
 
     <title>AdminHub</title>
 </head>
 <body>
 
 
-<!-- SIDEBAR  new version-->
+<!-- SIDEBAR -->
 <section id="sidebar">
     <a href="#" class="brand">
         <i class='bx bxs-smile'></i>
@@ -46,7 +44,7 @@
         <li>
             <a href="user.jsp">
                 <i class='bx bxs-group' ></i>
-                <span  class="text">User</span>
+                <span class="text">User</span>
             </a>
         </li>
     </ul>
@@ -171,6 +169,6 @@
 <!-- CONTENT -->
 
 
-<script src="../JS/script.js"></script>
+<script src="../JS/dashboard.js"></script>
 </body>
 </html>
