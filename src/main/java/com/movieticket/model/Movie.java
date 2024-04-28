@@ -5,8 +5,8 @@ import java.sql.Time;
 
 
 public class Movie {
-    private int movie_id;
-    private String img_url;
+    private int movieId;
+    private String imgUrl;
     private String title;
     private String description;
     private Genre genre;
@@ -14,9 +14,9 @@ public class Movie {
     private Time duration;
     private int price;
     private int rating;
-    private int number_of_seats;
-    private Time show_time;
-    private Date show_date;
+    private int numberOfSeats;
+    private Time showTime;
+    private Date showDate;
     public enum Genre {
         ACTION, COMEDY, DRAMA, HORROR, SCIENCE, ROMANCE,
     }
@@ -25,9 +25,12 @@ public class Movie {
         ar, en, fr,
     }
 
-    public Movie(int movie_id, String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int number_of_seats, Time show_time, Date show_date) {
-        this.movie_id = movie_id;
-        this.img_url = img_url;
+    public Movie() {
+    }
+
+    public Movie(int movieId, String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
+        this.movieId = movieId;
+        this.imgUrl = imgUrl;
         this.title = title;
         this.description = description;
         this.genre = genre;
@@ -35,15 +38,15 @@ public class Movie {
         this.duration = duration;
         this.price = price;
         this.rating = rating;
-        this.number_of_seats = number_of_seats;
-        this.show_time = show_time;
-        this.show_date = show_date;
+        this.numberOfSeats = numberOfSeats;
+        this.showTime = showTime;
+        this.showDate = showDate;
     }
 
 
-    public Movie(String img_url, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int number_of_seats, Time show_time, Date show_date) {
+    public Movie(String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
 
-        this.img_url = img_url;
+        this.imgUrl = imgUrl;
         this.title = title;
         this.description = description;
         this.genre = genre;
@@ -51,114 +54,105 @@ public class Movie {
         this.duration = duration;
         this.price = price;
         this.rating = rating;
-        this.number_of_seats = number_of_seats;
-        this.show_time = show_time;
-        this.show_date = show_date;
+        this.numberOfSeats = numberOfSeats;
+        this.showTime = showTime;
+        this.showDate = showDate;
     }
-    //Getters
-    public int getMovie_id() {
-        return movie_id;
+
+    public int getMovieId() {
+        return movieId;
     }
-    public String getImg_url() {
-        return img_url;
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public String getTitle() {
         return title;
     }
-    public String getDescription() {
-        return description;
-    }
-    public Genre getGenre() {
-        return genre;
-    }
-    public Language getLanguage() {
-        return language;
-    }
 
-    public Time getDuration() {
-        return duration;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public int getNumber_of_seats() {
-        return number_of_seats;
-    }
-
-    public Time getShow_time() {
-        return show_time;
-    }
-
-    public Date getShow_date() {
-        return show_date;
-    }
-
-
-    //Setters
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
-    }
-
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
-    }
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public Genre getGenre() {
+        return genre;
+    }
 
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
-
+    public Language getLanguage() {
+        return language;
+    }
 
     public void setLanguage(Language language) {
         this.language = language;
     }
 
-
+    public Time getDuration() {
+        return duration;
+    }
 
     public void setDuration(Time duration) {
         this.duration = duration;
     }
 
-
+    public int getPrice() {
+        return price;
+    }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
+    public int getRating() {
+        return rating;
+    }
 
     public void setRating(int rating) {
         this.rating = rating;
     }
 
-
-
-    public void setNumber_of_seats(int number_of_seats) {
-        this.number_of_seats = number_of_seats;
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-
-    public void setShow_time(Time show_time) {
-        this.show_time = show_time;
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
+    public Time getShowTime() {
+        return showTime;
+    }
 
+    public void setShowTime(Time showTime) {
+        this.showTime = showTime;
+    }
 
-    public void setShow_date(Date show_date) {
-        this.show_date = show_date;
+    public Date getShowDate() {
+        return showDate;
+    }
+
+    public void setShowDate(Date showDate) {
+        this.showDate = showDate;
     }
 }
 

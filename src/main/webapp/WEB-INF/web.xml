@@ -24,12 +24,30 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>MovieDetailsServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.MovieDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MovieDetailsServlet</servlet-name>
+        <url-pattern>/details</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ReservationServlet</servlet-name>
         <servlet-class>com.movieticket.servlets.user.ReservationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ReservationServlet</servlet-name>
         <url-pattern>/user/reserve</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AllReservationServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.AllReservationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AllReservationServlet</servlet-name>
+        <url-pattern>/user/reservations</url-pattern>
     </servlet-mapping>
 
     <servlet>

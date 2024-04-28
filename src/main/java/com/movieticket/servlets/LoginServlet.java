@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                session.setAttribute("userID", user.getUserId());
 
                 if (user.getRole() == UserRole.admin) {
                     response.sendRedirect(request.getContextPath() + "/admin/dashboard");

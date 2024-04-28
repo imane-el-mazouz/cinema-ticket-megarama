@@ -4,36 +4,29 @@ public class Reservation {
     private int reservationId;
     private int userId;
     private int movieId;
-    private SeatNumber numberOfTickets;
+    private int[] selectedSeats;
+    private String[] reservedSeatNumbersArray;
     private int priceTotal;
-
-    public enum SeatNumber{
-        A, B, C, D, E, F ,G, H, I, J ,K, L , M, N, O, P, Q, R, S, T,
-
-    }
 
     public Reservation() {
     }
 
-    public Reservation(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public Reservation(int reservationId, int userId, int movieId, SeatNumber numberOfTickets, int priceTotal) {
+    public Reservation(int userId, int movieId, int[] selectedSeats, int priceTotal) {
         this.reservationId = reservationId;
         this.userId = userId;
         this.movieId = movieId;
-        this.numberOfTickets = numberOfTickets;
+        this.selectedSeats = selectedSeats;
         this.priceTotal = priceTotal;
     }
 
-    public Reservation(int userId, int movieId, SeatNumber numberOfTickets, int priceTotal) {
-
+    public Reservation(int reservationId, int userId, int movieId, String[] reservedSeatNumbersArray, int priceTotal) {
+        this.reservationId = reservationId;
         this.userId = userId;
         this.movieId = movieId;
-        this.numberOfTickets = numberOfTickets;
+        this.reservedSeatNumbersArray = reservedSeatNumbersArray;
         this.priceTotal = priceTotal;
     }
+
 
     public int getReservationId() {
         return reservationId;
@@ -59,12 +52,12 @@ public class Reservation {
         this.movieId = movieId;
     }
 
-    public SeatNumber getNumberOfTickets() {
-        return numberOfTickets;
+    public int[] getSelectedSeats() {
+        return selectedSeats;
     }
 
-    public void setNumberOfTickets(SeatNumber numberOfTickets) {
-        this.numberOfTickets = numberOfTickets;
+    public void setSelectedSeats(int[] selectedSeats) {
+        this.selectedSeats = selectedSeats;
     }
 
     public int getPriceTotal() {
