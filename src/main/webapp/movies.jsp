@@ -33,6 +33,7 @@
             </button>
             <button class="btn btn-primary"><a href="login">Sign In</a> </button>
             <button class="btn btn-primary"><a href="signup">Sign Up</a> </button>
+
         </div>
         <button class="menu-open-btn" data-menu-open-btn>
             <ion-icon name="reorder-two"></ion-icon>

@@ -11,6 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDAOImpl implements MovieDAO {
+    @Override
+    public void deleteMovie(int movieId) throws SQLException {
+        String sql = "DELETE FROM movies WHERE movie_id = ?"; // Assuming your primary key column is 'movie_id'
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, movieId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw e; // Re-throw the exception to be handled by the servlet
+        }
+    }
 
     @Override
     public List<Movie> getAllMovies() throws SQLException {
@@ -170,5 +182,6 @@ public class MovieDAOImpl implements MovieDAO {
         } catch (SQLException e) {
             throw e;
         }
+
     }
 }

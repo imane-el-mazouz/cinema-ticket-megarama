@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userID", user.getUserId());
 
                 if (user.getRole() == UserRole.admin) {
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 } else {
                     response.sendRedirect(request.getContextPath() + "/movies");
                 }

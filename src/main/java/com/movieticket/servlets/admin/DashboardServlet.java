@@ -1,7 +1,7 @@
 package com.movieticket.servlets.admin;
 
 import com.movieticket.dao.MovieDAO;
-import com.movieticket.dao.MovieDAOImpl; // Replace with your actual DAO implementation
+import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
 
 import javax.servlet.ServletException;
@@ -13,23 +13,42 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/dashboard.jsp") // Assuming your dashboard JSP is at /dashboard.jsp
 public class DashboardServlet extends HttpServlet {
 
-    private MovieDAO movieDAO;
+    private static final long serialVersionUID = 1L;
+    private final MovieDAO movieDAO;
 
-    public void init() {
-        movieDAO = new MovieDAOImpl(); // Inject your concrete DAO implementation here
+    public DashboardServlet() {
+        super();
+        movieDAO = new MovieDAOImpl();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            List<Movie> movies = movieDAO.getAllMovies();
-            request.setAttribute("movies", movies);
-            request.getRequestDispatcher("/dashboard.jsp").forward(request, response); // Forward to your actual JSP
-        } catch (SQLException e) {
-            // Handle exceptions (e.g., log error, display error page)
-            throw new ServletException("Error retrieving movies", e);
+        String action = request.getParameter("action");
+
+        if ("delete".equals(action)) {
+            try {
+                int movieId = Integer.parseInt(request.getParameter("id"));
+                movieDAO.deleteMovie(movieId);
+            } catch (SQLException | NumberFormatException e) {
+                // Handle errors (e.g., invalid movie ID, database error)
+                throw new ServletException("Error deleting movie", e);
+            }
         }
+
+        // Fetch and display movies (same as before)
+        try {
+            List<Movie> allMovies = movieDAO.getAllMovies();
+            request.setAttribute("movies", allMovies);
+            request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
+        } catch (SQLException e) {
+            throw new ServletException("Error fetching movies from database", e);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

@@ -33,6 +33,7 @@ public class DisplayMovieServlet extends HttpServlet {
             List<Movie> getAllMovies = movieDAO.getAllMovies();
             request.setAttribute("getAllMovies", getAllMovies);
             request.getRequestDispatcher("/movies.jsp").forward(request, response);
+
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("");
