@@ -99,11 +99,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
-//        int userId = resultSet.getInt("user_id");
-        String userName = resultSet.getString("user_name");
-        String email = resultSet.getString("email");
-        String password = resultSet.getString("password");
-        UserRole role = UserRole.valueOf(resultSet.getString("role"));
-        return new User(userName, email, password, role);
+        User user = new User();
+        user.setUserId(resultSet.getInt("user_id"));
+        user.setUserName(resultSet.getString("user_name"));
+        user.setEmail(resultSet.getString("email"));
+        user.setPassword(resultSet.getString("password"));
+        user.setRole(UserRole.valueOf(resultSet.getString("role")));
+        return user;
     }
 }

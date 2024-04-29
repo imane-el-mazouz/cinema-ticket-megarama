@@ -1,5 +1,7 @@
 package com.movieticket.model;
 
+import java.util.Arrays;
+
 public class Reservation {
     private int reservationId;
     private int userId;

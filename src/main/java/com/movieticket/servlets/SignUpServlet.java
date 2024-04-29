@@ -20,6 +20,7 @@ public class SignUpServlet extends HttpServlet {
         super.init();
         userDAO = new UserDAOImpl();
     }
+    //nothing
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

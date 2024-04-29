@@ -1,42 +1,70 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 25/04/2024
-  Time: 14:35
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>My Reservations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .no-reservation {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-<main class="d-flex flex-column justify-content-centre align-items-center">
-    <section class="container mt-5" id="previousReservations"
-             style="${not empty previousReservations ? 'display: block;' : 'display: none;'}">
-        <h2 class="text-start mb-4">Previous Reservations</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Previous Reservation Cards - Dynamically Generated -->
-            <c:if test="${previousReservations.size() == 0}">
-                <h5>aucune reservation </h5>
-            </c:if >
-            <c:forEach var="reservation" items="${previousReservations}">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title fw-bold fs-3">Reservation ID: ${reservation.getReservationId()}</h5>
-                            </div>
-                            <p class="card-text">Room ID: ${reservation.getMovieId()}</p>
-                            <p class="card-text">Start Date: ${reservation.getSelectedSeats()}</p>
-                            <p class="card-text">End Date: ${reservation.getPriceTotal()}</p>
-                        </div>
+<div class="container">
+    <h2>My Reservations</h2>
 
-                    </div>
+    <c:choose>
+        <c:when test="${not empty userReservations}">
+            <c:forEach var="reservation" items="${userReservations}">
+                <div class="card">
+                    <h3>Reservation ID: ${reservation.reservationId}</h3>
+                    <p><strong>User ID:</strong> ${reservation.userId}</p>
+                    <p><strong>Movie ID:</strong> ${reservation.movieId}</p>
+                    <p><strong>Total Price:</strong> ${reservation.priceTotal}</p>
                 </div>
             </c:forEach>
-        </div>
-    </section>
+        </c:when>
+        <c:otherwise>
+            <div class="no-reservation">
+                <p>No reservations found.</p>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</div>
 </body>
 </html>

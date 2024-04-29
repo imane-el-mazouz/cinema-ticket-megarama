@@ -49,7 +49,7 @@
 <body>
 <div class="container">
     <h1>Add a new Movie</h1>
-    <form action="admin/add" method="POST">
+    <form action="${pageContext.request.contextPath}/admin/add" method="POST">
         <div class="mb-3">
             <label for="img_url" class="form-label">Image URL:</label>
             <input type="text" id="img_url" name="img_url" class="form-control" required>

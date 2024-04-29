@@ -34,11 +34,9 @@ public class AddMovieServlet extends HttpServlet {
             String description = request.getParameter("description");
             Movie.Genre genre = Movie.Genre.valueOf(request.getParameter("genre"));
             Movie.Language language = Movie.Language.valueOf(request.getParameter("language"));
-            //java.sql.Time duration = java.sql.Time.valueOf(request.getParameter("duration"));
             String durationStr = request.getParameter("duration") + ":00";
             java.sql.Time duration = java.sql.Time.valueOf(durationStr);
             int price = Integer.parseInt(request.getParameter("price"));
-            int rating = Integer.parseInt(request.getParameter("rating"));
             int number_of_seats = Integer.parseInt(request.getParameter("number_of_seats"));
             String showTimeStr = request.getParameter("show_time") + ":00";
             java.sql.Time show_time = java.sql.Time.valueOf(showTimeStr);
@@ -49,8 +47,8 @@ public class AddMovieServlet extends HttpServlet {
             Movie movie = new Movie(img_url, title, description, genre, language, duration, price, 0, number_of_seats, show_time, show_date);
 
             movieDAO.addMovie(movie);
-            response.sendRedirect("/index.jsp");
-        } catch (SQLException e) {
+            response.sendRedirect(request.getContextPath() + "/movies");
+        } catch (SQLException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add movie.");
             request.getRequestDispatcher("").forward(request, response);

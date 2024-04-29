@@ -60,7 +60,7 @@ public class ReservationDAOImp implements ReservationDAO {
     @Override
     public List<Reservation> getPreviousReservations(int userId) {
         List<Reservation> reservations = new ArrayList<>();
-        String sql = "SELECT r.*, GROUP_CONCAT(a.seat_number) AS reserved_seats " +
+        String sql = "SELECT r.reservation_id, r.movie_id, r.price_total, a.seat_number " +
                 "FROM reservations r " +
                 "JOIN available_seats a ON r.seat_id = a.available_seat_id " +
                 "WHERE r.user_id = ?";
@@ -72,16 +72,19 @@ public class ReservationDAOImp implements ReservationDAO {
 
             while (resultSet.next()) {
                 int reservationId = resultSet.getInt("reservation_id");
-                int movieId  = resultSet.getInt("movie_id");
-                String reservedSeatNumbers = resultSet.getString("reserved_seats");
-                int priceTotal  = resultSet.getInt("price_total");
+                int movieId = resultSet.getInt("movie_id");
+                int priceTotal = resultSet.getInt("price_total");
 
-                String[] reservedSeatNumbersArray = reservedSeatNumbers.split(",");
-                Reservation reservation = new Reservation(reservationId, userId, movieId, reservedSeatNumbersArray, priceTotal);
+                Reservation reservation = new Reservation();
+                reservation.setReservationId(reservationId);
+                reservation.setUserId(userId);
+                reservation.setMovieId(movieId);
+                reservation.setPriceTotal(priceTotal);
+
                 reservations.add(reservation);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle this appropriately, log or inform the user
         }
 
         return reservations;

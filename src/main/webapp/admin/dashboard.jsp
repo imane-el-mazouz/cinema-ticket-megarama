@@ -140,12 +140,12 @@
                         <c:when test="${not empty movies}">
                             <c:forEach var="movie" items="${movies}">
                                 <tr>
-                                    <td><img src="${movie.img_url}" width="100"></td>
+                                    <td><img src="${movie.imgUrl}" width="100"></td>
                                     <td>${movie.title}</td>
                                     <td>${movie.genre}</td>
-                                    <td>${movie.show_date}</td>
+                                    <td>${movie.showDate}</td>
                                     <td>
-                                        <a  class="status pending" href="${pageContext.request.contextPath}/admin/dashboard?action=delete&id=${movie.movie_id}">Delete</a>                                    </td>
+                                        <a  class="status pending" href="${pageContext.request.contextPath}/admin/dashboard?action=delete&id=${movie.movieId}">Delete</a>                                    </td>
                                 </tr>
                             </c:forEach>
                         </c:when>
@@ -157,7 +157,7 @@
                     </c:choose>
                     </tbody>
                 </table>
-        </div>
+            </div>
         </div>
 
     </main>
