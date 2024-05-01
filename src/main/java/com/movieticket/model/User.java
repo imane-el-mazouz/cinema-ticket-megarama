@@ -1,10 +1,25 @@
 package com.movieticket.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+
     private int userId;
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private UserRole role;
 
     public User() {
