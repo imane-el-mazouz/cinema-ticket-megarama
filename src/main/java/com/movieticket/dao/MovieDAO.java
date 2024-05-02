@@ -14,5 +14,7 @@ public interface MovieDAO {
     int getPrice(int movieId);
     String getName(int movieId);
     void searchMovie(String title) throws SQLException;
+    void addComment (String title , String commentaire) throws SQLException ;
 
+    List<String> getCommentairesForMovieTitle(String title);
 }

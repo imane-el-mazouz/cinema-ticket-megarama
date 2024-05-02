@@ -116,6 +116,15 @@
 
                     <a href="movies" class="btn btn-primary">Submit Comment</a>
                 </div>
+
+                <div class="comments-section">
+                    <h2>Comments</h2>
+                    <ul>
+                        <c:forEach var="commentaire" items="${commentaires}">
+                            <li>${commentaire}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </section>
     </article>

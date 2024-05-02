@@ -211,8 +211,11 @@ public class Movie {
     @Column(name = "show_date")
     private Date showDate;
 
+
     @Column(name = "commentaire")
     private String commentaire;
+
+
 
     public Movie(int movieId, String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate, String commentaire) {
         this.movieId = movieId;
@@ -231,6 +234,9 @@ public class Movie {
     }
 
     public Movie(String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int price1, int numberOfSeats, Time showTime, Date showDate, String commentaire) {
+    }
+
+    public Movie(String title, String commentaire) {
     }
 
     public String getCommentaire() {

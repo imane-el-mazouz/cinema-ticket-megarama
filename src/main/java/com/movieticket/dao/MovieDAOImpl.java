@@ -180,6 +180,7 @@ public class MovieDAOImpl implements MovieDAO {
 
 
 
+
     @Override
     public void addMovie(Movie movie) throws SQLException {
         try (Connection connection = DatabaseManager.getConnection();
@@ -205,5 +206,24 @@ public class MovieDAOImpl implements MovieDAO {
             throw e;
         }
 
+    }
+    @Override
+    public void addComment(String title, String commentaire) throws SQLException {
+         try(Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "INSERT INTO movies (title, commentaire) " +
+                     "VALUES (?, ?)")) {
+
+             statement.setString(1, title);
+             statement.setString(2,commentaire);
+             statement.executeUpdate();
+
+
+         }
+}
+
+    @Override
+    public List<String> getCommentairesForMovieTitle(String title) {
+        return null;
     }
 }

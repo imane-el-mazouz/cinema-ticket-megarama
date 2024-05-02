@@ -127,8 +127,6 @@
 
                                         <data>${movie.getRating()}</data>
                                     </div>
-
-
                                 </div>
                             </div>
                         </li>
