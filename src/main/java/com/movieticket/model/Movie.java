@@ -157,6 +157,10 @@
 //}
 /////////////////////
 package com.movieticket.model;
+import com.movieticket.model.Genre;
+import com.movieticket.model.Language ;
+
+
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -207,6 +211,36 @@ public class Movie {
     @Column(name = "show_date")
     private Date showDate;
 
+    @Column(name = "commentaire")
+    private String commentaire;
+
+    public Movie(int movieId, String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate, String commentaire) {
+        this.movieId = movieId;
+        this.imgUrl = imgUrl;
+        this.title = title;
+        this.description = description;
+        this.genre = genre;
+        this.language = language;
+        this.duration = duration;
+        this.price = price;
+        this.rating = rating;
+        this.numberOfSeats = numberOfSeats;
+        this.showTime = showTime;
+        this.showDate = showDate;
+        this.commentaire = commentaire;
+    }
+
+    public Movie(String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int price1, int numberOfSeats, Time showTime, Date showDate, String commentaire) {
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
     public Movie(int movieId, String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
         this.movieId = movieId;
         this.imgUrl = imgUrl;
@@ -221,6 +255,7 @@ public class Movie {
         this.showTime = showTime;
         this.showDate = showDate;
     }
+
 
     public Movie() {
 
@@ -320,5 +355,13 @@ public class Movie {
 
     public void setShowDate(Date showDate) {
         this.showDate = showDate;
+    }
+
+    public enum Genre {
+        ACTION, COMEDY, DRAMA, HORROR, SCIENCE, ROMANCE,
+    }
+
+    public enum Language {
+        ar, en, fr,
     }
 }

@@ -4,6 +4,8 @@ import com.movieticket.dao.MovieDAO;
 import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
 
+import com.movieticket.model.Genre;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,9 +44,10 @@ public class AddMovieServlet extends HttpServlet {
             java.sql.Time show_time = java.sql.Time.valueOf(showTimeStr);
 
             java.sql.Date show_date = java.sql.Date.valueOf(request.getParameter("show_date"));
+            String commentaire = request.getParameter("commentaire");
 
 
-            Movie movie = new Movie(img_url, title, description, genre, language, duration, price, 0, number_of_seats, show_time, show_date);
+            Movie movie = new Movie(img_url, title, description, genre, language, duration, price, 0, number_of_seats, show_time, show_date ,commentaire);
 
             movieDAO.addMovie(movie);
             response.sendRedirect(request.getContextPath() + "/movies");

@@ -1,7 +1,10 @@
 package com.movieticket.dao;
 
+
 import com.Connection.DatabaseManager;
 import com.movieticket.model.Movie;
+import com.movieticket.model.Genre;
+import com.movieticket.model.Language;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +16,14 @@ import java.util.List;
 public class MovieDAOImpl implements MovieDAO {
     @Override
     public void deleteMovie(int movieId) throws SQLException {
-        String sql = "DELETE FROM movies WHERE movie_id = ?"; // Assuming your primary key column is 'movie_id'
+        String sql = "DELETE FROM movies WHERE movie_id = ?";
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, movieId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw e; // Re-throw the exception to be handled by the servlet
+            throw e;
         }
     }
 
@@ -45,8 +48,10 @@ public class MovieDAOImpl implements MovieDAO {
                 int numberOfSeats = resultSet.getInt("number_of_seats");
                 java.sql.Time showTime = resultSet.getTime("show_time");
                 java.sql.Date showDate = resultSet.getDate("show_date");
+                String commentaire= resultSet.getString("commentaire");
 
-                Movie movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate);
+
+                Movie movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate , commentaire);
                 movies.add(movie);
             }
         } catch (SQLException e) {
@@ -75,8 +80,10 @@ public class MovieDAOImpl implements MovieDAO {
                     int numberOfSeats = resultSet.getInt("number_of_seats");
                     java.sql.Time showTime = resultSet.getTime("show_time");
                     java.sql.Date showDate = resultSet.getDate("show_date");
+                    String commentaire= resultSet.getString("commentaire");
 
-                    movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate);
+
+                    movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate , commentaire);
                 }
             }
         } catch (SQLException e) {
@@ -107,8 +114,10 @@ public class MovieDAOImpl implements MovieDAO {
                 int number_of_seats = resultSet.getInt("number_of_seats");
                 java.sql.Time show_time = resultSet.getTime("show_time");
                 java.sql.Date show_date = resultSet.getDate("show_date");
+                String commentaire= resultSet.getString("commentaire");
 
-                Movie movie = new Movie(movie_id, img_url, title, description, genreStr, language, duration, price, rating, number_of_seats, show_time, show_date);
+
+                Movie movie = new Movie(movie_id, img_url, title, description, genreStr, language, duration, price, rating, number_of_seats, show_time, show_date , commentaire);
                 movies.add(movie);
             }
         } catch (SQLException e) {
@@ -135,7 +144,7 @@ public class MovieDAOImpl implements MovieDAO {
             System.err.println("Error fetching movie price: " + e.getMessage());
         }
 
-        return 0; // Retourner 0 si le prix n'a pas pu être récupéré
+        return 0;
     }
 
     @Override
@@ -156,7 +165,7 @@ public class MovieDAOImpl implements MovieDAO {
             System.err.println("Error fetching movie name: " + e.getMessage());
         }
 
-        return null; // Retourner null si le nom n'a pas pu être récupéré
+        return null;
     }
 
     @Override
@@ -175,8 +184,8 @@ public class MovieDAOImpl implements MovieDAO {
     public void addMovie(Movie movie) throws SQLException {
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO movies (img_url, title, description, genre, language, duration, price, rating, number_of_seats, show_time, show_date) " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                     "INSERT INTO movies (img_url, title, description, genre, language, duration, price, rating, number_of_seats, show_time, show_date , commentaire) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)")) {
 
             statement.setString(1, movie.getImgUrl());
             statement.setString(2, movie.getTitle());
@@ -189,6 +198,7 @@ public class MovieDAOImpl implements MovieDAO {
             statement.setInt(9, movie.getNumberOfSeats());
             statement.setTime(10, movie.getShowTime());
             statement.setDate(11, movie.getShowDate());
+            statement.setString(12, movie.getCommentaire());
 
             statement.executeUpdate();
         } catch (SQLException e) {

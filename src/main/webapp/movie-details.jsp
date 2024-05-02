@@ -108,6 +108,13 @@
                     <button class="btn btn-primary">
                         <span> <a href="${pageContext.request.contextPath}/user/reserve?movieId=${selectedMovie.getMovieId()}&&">Reserve Now</a> </span>
                     </button>
+
+                    <div class="form-group">
+                        <label for="commentaire">Comment</label>
+                        <input type="text" class="form-control" id="commentaire" name="commentaire" placeholder="Commentaire">
+                    </div>
+
+                    <a href="movies" class="btn btn-primary">Submit Comment</a>
                 </div>
             </div>
         </section>

@@ -1,14 +1,33 @@
 package com.movieticket.model;
+import javax.persistence.*;
+
 
 import java.util.Arrays;
-
+@Entity
+@Table(name = "reservations")
 public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservationId")
     private int reservationId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private int userId;
+    @ManyToOne
+    @JoinColumn(name = "movieId")
     private int movieId;
+
+    @Column(name = "selectedSeats")
     private int[] selectedSeats;
+    @Column(name = "reservedSeatNumbersArray")
+
     private String[] reservedSeatNumbersArray;
+    @Column(name = "priceTotal")
+
     private int priceTotal;
+
 
     public Reservation() {
     }
