@@ -155,7 +155,7 @@
 //        this.showDate = showDate;
 //    }
 //}
-
+/////////////////////
 package com.movieticket.model;
 
 import javax.persistence.*;
@@ -181,7 +181,6 @@ public class Movie {
 
     @Column(name = "description")
     private String description;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "genre")
     private Genre genre;
