@@ -160,6 +160,18 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
+    public void searchMovie(String title) throws SQLException {
+        try(Connection connection = DatabaseManager.getConnection();
+            PreparedStatement statement= connection.prepareStatement(
+                    "SELECT * FROM movies WHERE title = ?")){
+            statement.setString(1,title);
+
+            }
+    }
+
+
+
+    @Override
     public void addMovie(Movie movie) throws SQLException {
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
