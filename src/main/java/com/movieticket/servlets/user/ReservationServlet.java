@@ -30,43 +30,42 @@ public class ReservationServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int userId = 2;
+        HttpSession session = request.getSession();
+        int userId = (int) session.getAttribute("userID");
         int movieId = Integer.parseInt(request.getParameter("movieId"));
 
         List<AvailableSeat> availableSeats = availableSeatDAO.getAllSeats().stream()
                 .filter(seat -> seat.getMovieId() == movieId) .collect(Collectors.toList());
-
+        request.setAttribute("availableSeats", availableSeats);
 
         int price = movieDAO.getPrice(movieId);
         request.setAttribute("price", price);
-        String name = movieDAO.getName(movieId);
-        request.setAttribute("name", name);
+        String title = movieDAO.getName(movieId);
         request.setAttribute("userId", userId);
         request.setAttribute("movieId", movieId);
-        request.setAttribute("availableSeats", availableSeats);
-        request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
+        request.setAttribute("title", title);
+        request.setAttribute("userId", userId);
+        request.setAttribute("movieId", movieId);
 
+        request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
     }
 
-    protected void doPot(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        HttpSession session = request.getSession();
+        int userId = (int) session.getAttribute("userID");
         int movieId = Integer.parseInt(request.getParameter("movieId"));
-        String[] selectedSeatStrings = request.getParameterValues("selectedSeats");
-
-        int[] selectedSeats = Arrays.stream(selectedSeatStrings) .mapToInt(Integer::parseInt) .toArray();
-
-        if (selectedSeats == null || selectedSeats.length == 0) {
-            response.getWriter().println("Aucun siège sélectionné.");
-            return;
+        String[] selectedSeats = request.getParameterValues("selectedSeats");
+        int price = movieDAO.getPrice(movieId);
+        for (String seatNumber : selectedSeats) {
+            reservationDAO.addReservation(userId, movieId, seatNumber, price);
         }
 
-        int priceTotal = reservationDAO.calculatePrice(movieId, selectedSeats.length);
 
-        List<Reservation> previousReservations = reservationDAO.getPreviousReservations(userId);
-        request.setAttribute("previousReservations", previousReservations);
-        request.getRequestDispatcher("/user/reservation-history.jsp").forward(request, response);
+        // Get all reservations for the current user from the DAO
+        List<Reservation> userReservations = reservationDAO.getPreviousReservations(userId);
+        request.setAttribute("previousReservations", userReservations);
+        request.getRequestDispatcher("/user/reservations").forward(request, response);
     }
 
 }

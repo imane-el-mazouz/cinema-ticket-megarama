@@ -14,18 +14,9 @@ public class Reservation {
     }
 
     public Reservation(int userId, int movieId, int[] selectedSeats, int priceTotal) {
-        this.reservationId = reservationId;
         this.userId = userId;
         this.movieId = movieId;
         this.selectedSeats = selectedSeats;
-        this.priceTotal = priceTotal;
-    }
-
-    public Reservation(int reservationId, int userId, int movieId, String[] reservedSeatNumbersArray, int priceTotal) {
-        this.reservationId = reservationId;
-        this.userId = userId;
-        this.movieId = movieId;
-        this.reservedSeatNumbersArray = reservedSeatNumbersArray;
         this.priceTotal = priceTotal;
     }
 

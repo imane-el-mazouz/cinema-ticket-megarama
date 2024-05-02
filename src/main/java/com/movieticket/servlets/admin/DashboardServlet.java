@@ -32,8 +32,7 @@ public class DashboardServlet extends HttpServlet {
                 int movieId = Integer.parseInt(request.getParameter("id"));
                 movieDAO.deleteMovie(movieId);
             } catch (SQLException | NumberFormatException e) {
-                // Handle errors (e.g., invalid movie ID, database error)
-                throw new ServletException("Error deleting movie", e);
+                e.printStackTrace();
             }
         }
 
