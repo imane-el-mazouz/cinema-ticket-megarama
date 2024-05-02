@@ -1,5 +1,5 @@
 package com.movieticket.servlets;
-
+//
 import com.movieticket.dao.MovieDAO;
 import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
@@ -24,6 +24,7 @@ public class DisplayMovieServlet extends HttpServlet {
         super();
         movieDAO = new MovieDAOImpl();
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

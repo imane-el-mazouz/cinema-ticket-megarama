@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ReservationDAO {
-    public int calculatePrice(int movieId, int numberOfSeats);
-    int getSeatId(Connection conn, int movieId, String seatNumber) throws SQLException;
-    boolean makeReservation(Reservation reservation);
+    int calculatePrice(int movieId, int numberOfSeats);
+    void addReservation(int userId, int movieId, String seatNumber, int priceTotal);
     List<Reservation> getPreviousReservations(int userId);
 }

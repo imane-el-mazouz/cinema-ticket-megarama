@@ -33,29 +33,37 @@ public class ReservationDAOImp implements ReservationDAO {
         return totalPrice;
     }
 
+
     @Override
-    public int getSeatId(Connection conn, int movieId, String seatNumber) throws SQLException {
-        String sql = "SELECT available_seat_id FROM available_seats WHERE movie_id = ? AND seat_number = ?";
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setInt(1, movieId);
-            statement.setString(2, seatNumber);
-            try (var resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getInt("available_seat_id");
-                } else {
-                    return -1; // Seat not available
-                }
-            }
+    public void addReservation(int userId, int movieId, String seatNumber, int priceTotal) {
+        String sql = "INSERT INTO reservations (user_id, movie_id, seat_id, price_total) VALUES (?, ?, (SELECT available_seat_id FROM available_seats WHERE movie_id = ? AND seat_number = ?), ?)";
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            connection.setAutoCommit(false);
+
+            // Insérer la réservation
+            statement.setInt(1, userId);
+            statement.setInt(2, movieId);
+            statement.setInt(3, movieId);
+            statement.setString(4, seatNumber);
+            statement.setInt(5, priceTotal);
+            statement.executeUpdate();
+
+            String updateSql = "UPDATE available_seats SET is_available = FALSE WHERE movie_id = ? AND seat_number = ?";
+            PreparedStatement updateStatement = connection.prepareStatement(updateSql);
+            updateStatement.setInt(1, movieId);
+            updateStatement.setString(2, seatNumber);
+            updateStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            System.err.println("Error adding reservation: " + e.getMessage());
         }
     }
 
-    @Override
-    public boolean makeReservation(Reservation reservation) {
-        String sql = "INSERT INTO reservations (user_id, movie_id, seat_id, price_total) VALUES (?, ?, ?, ?)";
-
-
-        return false;
-    }
 
     @Override
     public List<Reservation> getPreviousReservations(int userId) {
@@ -84,7 +92,7 @@ public class ReservationDAOImp implements ReservationDAO {
                 reservations.add(reservation);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle this appropriately, log or inform the user
+            e.printStackTrace();
         }
 
         return reservations;

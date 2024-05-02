@@ -13,5 +13,6 @@ public interface MovieDAO {
     void deleteMovie(int movieId) throws SQLException;
     int getPrice(int movieId);
     String getName(int movieId);
+    void searchMovie(String title) throws SQLException;
 
 }

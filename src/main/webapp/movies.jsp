@@ -6,6 +6,7 @@
     <!--
       - custom css link
     -->
+    <style><%@include file ="./CSS/styles.css"%></style>
     <link rel="stylesheet" href="CSS/styles.css">
     <!--
       - google font link
