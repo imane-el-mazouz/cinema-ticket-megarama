@@ -78,7 +78,25 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddReactionServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.AddReactionServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>AddReactionServlet</servlet-name>
+        <url-pattern>/addreaction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name> DeleteReactionServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.DeleteReactionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name> DeleteReactionServlet</servlet-name>
+        <url-pattern>/deletereaction</url-pattern>
+    </servlet-mapping>
 
 
     <welcome-file-list>

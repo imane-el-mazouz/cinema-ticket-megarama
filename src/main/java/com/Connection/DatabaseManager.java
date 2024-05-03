@@ -10,20 +10,16 @@ public class DatabaseManager {
     private static final String JDBC_PASSWORD = "1234";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    // Private constructor to prevent instantiation
     private DatabaseManager() {}
 
-    // Static block to load the JDBC driver when the class is loaded
     static {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
-            // Log or handle the exception appropriately
             e.printStackTrace();
         }
     }
 
-    // Method to get a database connection
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
     }

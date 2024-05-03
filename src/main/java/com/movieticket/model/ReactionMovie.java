@@ -7,6 +7,10 @@ public class ReactionMovie {
     private int rating;
     private String comment;
     public ReactionMovie() {}
+
+    public ReactionMovie(int reactionMovieId, int userId, int movieId, int rating, String comment) {
+    }
+
     public int getReactionMovieId() {
         return reactionMovieId;
     }

@@ -31,7 +31,7 @@ public class ReservationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int userId = (int) session.getAttribute("userID");
+        int userId = (int) session.getAttribute("userId");
         int movieId = Integer.parseInt(request.getParameter("movieId"));
 
         List<AvailableSeat> availableSeats = availableSeatDAO.getAllSeats().stream()
@@ -44,8 +44,6 @@ public class ReservationServlet extends HttpServlet {
         request.setAttribute("userId", userId);
         request.setAttribute("movieId", movieId);
         request.setAttribute("title", title);
-        request.setAttribute("userId", userId);
-        request.setAttribute("movieId", movieId);
 
         request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
     }

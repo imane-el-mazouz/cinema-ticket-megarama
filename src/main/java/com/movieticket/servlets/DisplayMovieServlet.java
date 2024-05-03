@@ -1,5 +1,5 @@
 package com.movieticket.servlets;
-//
+
 import com.movieticket.dao.MovieDAO;
 import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
