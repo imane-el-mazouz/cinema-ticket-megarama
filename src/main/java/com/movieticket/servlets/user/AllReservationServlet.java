@@ -25,13 +25,10 @@ public class AllReservationServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
 
-        // Get all reservations for the current user from the DAO
         List<Reservation> userReservations = reservationDAO.getPreviousReservations(userId);
 
-        // Set the reservations as an attribute in the request
         request.setAttribute("userReservations", userReservations);
 
-        // Forward the request to the JSP to display the reservations
         request.getRequestDispatcher("/user/reservations-history.jsp").forward(request, response);
     }
 }
