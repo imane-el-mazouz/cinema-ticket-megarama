@@ -1,12 +1,15 @@
 package com.movieticket.dao;
 
+import com.movieticket.model.Movie;
 import com.movieticket.model.ReactionMovie;
 import com.Connection.DatabaseManager;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.Connection.DatabaseManager.getConnection;
@@ -64,4 +67,27 @@ public class ReactionMovieDAOImp implements ReactionMovieDAO {
         }
     }
 
+    public List<ReactionMovie> getAllReactions() {
+        List<ReactionMovie> reactions = new ArrayList<>();
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM reaction_movies");
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int reactionMovieId = resultSet.getInt("reactionMovieId");
+                int userId = resultSet.getInt("user_id");
+                int movieId = resultSet.getInt("movie_id");
+                int rating = resultSet.getInt("rating");
+                String comment = resultSet.getString("comment");
+
+                ReactionMovie reactionMovie = new ReactionMovie(reactionMovieId, userId, movieId, rating, comment);
+                reactions.add(reactionMovie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reactions;
+    }
 }

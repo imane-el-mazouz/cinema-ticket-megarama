@@ -11,4 +11,6 @@ public interface ReactionMovieDAO {
     void addReactionMovie(ReactionMovie reactionMovie);
     void updateReactionMovie(ReactionMovie reactionMovie);
     void deleteReactionMovie(int reactionMovieId);
+
+    List<ReactionMovie> getAllReactions();
 }
