@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+<body>
 <head>
     <title>Megarama Béni Mellal</title>
     <link rel="stylesheet" href="CSS/styles.css">
@@ -8,12 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style><%@include file ="./CSS/styles.css"%></style>
-    <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <header class="header" data-header>
     <div class="container">
         <div class="overlay" data-overlay></div>
-        <a href="movies" class="logo">
+        <a href="movie" class="logo">
             <img src="images/logo.png" height="50px" alt="Cinema-TV">
         </a>
         <div class="header-actions">
@@ -29,7 +29,7 @@
         </button>
         <nav class="navbar" data-navbar>
             <div class="navbar-top">
-                <a href="movies" class="logo">
+                <a href="movie" class="logo">
                     <img src="images/logo.png" alt="Cinema LOgo">
                 </a>
                 <button class="menu-close-btn" data-menu-close-btn>
@@ -38,7 +38,7 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="movies" class="navbar-link">Movies</a>
+                    <a href="movie" class="navbar-link">Movies</a>
                 </li>
                 <li>
                     <a href="user/reservations" class="navbar-link">Reserve Ticket</a>

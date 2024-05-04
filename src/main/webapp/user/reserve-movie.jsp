@@ -1,30 +1,20 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
+<body>
 <head>
-    <!--
-      - custom css link
-    -->
-    <style><%@include file ="../CSS/styles.css"%></style>
-    <link rel="stylesheet" href="CSS/styles.css">    <!--
-      - google font link
-    -->
+    <title>Megarama Béni Mellal</title>
+    <link rel="stylesheet" href="CSS/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style><%@include file ="../CSS/styles.css"%></style>
 </head>
-
-<body id="#top">
-
-<!--
-  - #HEADER
--->
-
+<% String successMessage = (String) request.getAttribute("successMessage"); %>
 <header class="header" data-header>
     <div class="container">
         <div class="overlay" data-overlay></div>
-        <a href="movies" class="logo">
+        <a href="movie" class="logo">
             <img src="../images/logo.png" height="50px" alt="Cinema-TV">
         </a>
         <div class="header-actions">
@@ -40,8 +30,8 @@
         </button>
         <nav class="navbar" data-navbar>
             <div class="navbar-top">
-                <a href="movies" class="logo">
-                    <img src="../images/logo.png" alt="Cinema LOgo">
+                <a href="movie" class="logo">
+                    <img src="images/logo.png" alt="Cinema LOgo">
                 </a>
                 <button class="menu-close-btn" data-menu-close-btn>
                     <ion-icon name="close-outline"></ion-icon>
@@ -49,13 +39,13 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="${pageContext.request.contextPath}/movies" class="navbar-link">Movies</a>
+                    <a href="movie" class="navbar-link">Movies</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/user/reserve" class="navbar-link">Reserve Ticket</a>
+                    <a href="user/reservations" class="navbar-link">Reserve Ticket</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/user/reservations" class="navbar-link">All Reservation</a>
+                    <a href="user/reservations" class="navbar-link">All Reservation</a>
                 </li>
             </ul>
 
@@ -89,123 +79,64 @@
         </nav>
     </div>
 </header>
-<main CLASS="container-details">
-    <h2 class="h2 section-title" style="margin-bottom: 5%">My Reservations</h2>
+<main>
+    <article>
+        <section class="movie-detail">
+            <div class="container">
+                <div class="container" style="display: flex; flex-direction: column; gap: 5%;">
+                    <h1 class="h1 detail-title">${selectedMovie.getTitle()}</h1>
+                    <figure class="movie-detail-banner">
+                        <img src="${selectedMovie.getImgUrl()}" alt="${selectedMovie.getTitle()} poster">
+                    </figure>
+                </div>
 
-    <form id="reservationForm" action="user/reserve" method="POST" style="color:white;">
-        <div class="movie-container">
-            <label>Movie</label>
-            <input type="hidden" name="userId" value="<%= request.getAttribute("userId")%>"></input>
-            <input type="hidden" name="movieId" value="<%= request.getAttribute("movieId")%>"></input>
-            <input type="text" value="<%= request.getAttribute("title")%>" disabled></input>
-            <input type="text" value="<%= request.getAttribute("price")%>" disabled></input>
-        </div>
-        <div class="seating-container">
-            <div class="screen"></div>
+                <div class="movie-detail-content">
+                    <form id="reservationForm" action="reserve" method="POST" style="color:white; margin-right: 5%;">
+                            <input type="hidden" name="userId" value="<%= request.getParameter("userId")%>"></input>
+                            <input type="hidden" name="movieId" value="<%= request.getParameter("movieId") %>"></input>
+                        <div class="seating-container">
+                            <div class="screen"></div>
 
-            <div class="row-reserve" style="display: flex; gap: 5px; flex-wrap: wrap">
+                            <div class="row-reserve" style="display: flex; gap: 5%; flex-wrap: wrap">
 
-                    <c:forEach var="seat" items="${availableSeats}" varStatus="loop">
-                        <div class="col-md-4">
-                        <c:choose>
-                            <c:when test="${seat.available}">
-                                <label for="${seat.seatNumber}">
-                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
-                                    <input type="checkbox" name="selectedSeats" value="${seat.seatNumber}" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" >${seat.seatNumber}<img src="../images/GREYseat.png" alt="A1" width="50" height="40">
-                                    </input>
-                                </label>
-                            </c:when>
-                            <c:otherwise>
-                                <label for="${seat.seatNumber}">
-                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
-                                    <input type="checkbox" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" disabled>${seat.seatNumber}<img src="../images/READseat.png" alt="A1" width="50" height="40">
-                                    </input>
-                                </label>
-                            </c:otherwise>
-                        </c:choose>
+                                <c:forEach var="seat" items="${availableSeats}" varStatus="loop">
+                                    <div class="col-md-4">
+                                        <c:choose>
+                                            <c:when test="${seat.available}">
+                                                <label for="${seat.seatNumber}">
+                                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
+                                                    <input type="checkbox" name="selectedSeats" value="${seat.seatNumber}" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" >${seat.seatNumber}<img src="../images/GREYseat.png" alt="A1" width="50" height="40">
+                                                    </input>
+                                                </label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <label for="${seat.seatNumber}">
+                                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
+                                                    <input type="checkbox" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" disabled>${seat.seatNumber}<img src="../images/READseat.png" alt="A1" width="50" height="40">
+                                                    </input>
+                                                </label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </c:forEach>
+
+                            </div>
                         </div>
-                    </c:forEach>
-
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;">Confirmer</button>
+                    </form>
+                </div>
             </div>
-
-
-        </div>
-        <button type="submit">Confirmer la réservation</button>
-    </form>
+        </section>
+    </article>
 </main>
-<!--
-  - #FOOTER
--->
-<footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="divider"></div>
-            <div class="quicklink-wrapper">
-                <ul class="quicklink-list">
-                    <li>
-                        <a href="#" class="quicklink-link">Faq</a>
-                    </li>
-                    <li>
-                        <a href="#" class="quicklink-link">Help center</a>
-                    </li>
-                    <li>
-                        <a href="#" class="quicklink-link">Terms of use</a>
-                    </li>
-                    <li>
-                        <a href="#" class="quicklink-link">Privacy</a>
-                    </li>
-                </ul>
-                <ul class="social-list">
-                    <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-pinterest"></ion-icon>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-linkedin"></ion-icon>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="container">
-            <p class="copyright">
-                &copy; 2022 <a href="#">Megarama Béni Mellal</a>. All Rights Reserved
-            </p>
-            <img src="../images/footer-bottom-img.png" alt="Online banking companies logo" class="footer-bottom-img">
-        </div>
-    </div>
-</footer>
-<!--
-  - #GO TO TOP
--->
-<a href="#top" class="go-top" data-go-top>
-    <ion-icon name="chevron-up"></ion-icon>
-</a>
-<!--
-  - custom js link
--->
+<script>
+    <%-- Affichage de l'alerte de succès --%>
+    <%if (successMessage != null && !successMessage.isEmpty()) {%>
+    alert("<%=successMessage%>");
+    <%}%>
+</script>
 <script src="../JS/script.js"></script>
-<!--
-  - ionicon link
--->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script>
-
-</script>
 </body>
 </html>

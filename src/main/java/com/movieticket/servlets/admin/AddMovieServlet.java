@@ -6,10 +6,7 @@ import com.movieticket.model.Movie;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,7 +45,7 @@ public class AddMovieServlet extends HttpServlet {
 
             movieDAO.addMovie(movie);
             response.sendRedirect(request.getContextPath() + "/movies");
-        } catch (SQLException | IllegalArgumentException | NullPointerException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add movie.");
             request.getRequestDispatcher("").forward(request, response);

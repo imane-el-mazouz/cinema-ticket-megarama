@@ -28,7 +28,7 @@
             </a>
         </li>
         <li>
-            <a href="/Megarama_war_exploded/movies">
+            <a href="/Megarama_war_exploded/movie">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Movie</span>
             </a>
@@ -151,7 +151,7 @@
                         </c:when>
                         <c:otherwise>
                             <tr>
-                                <td colspan="5">No movies found</td>
+                                <td colspan="5">No movie found</td>
                             </tr>
                         </c:otherwise>
                     </c:choose>

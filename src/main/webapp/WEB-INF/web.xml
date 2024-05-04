@@ -20,7 +20,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMovieServlet</servlet-name>
-        <url-pattern>/movies</url-pattern>
+        <url-pattern>/movie</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -82,7 +82,7 @@
 
 
     <welcome-file-list>
-        <welcome-file>movies</welcome-file>
+        <welcome-file>movie</welcome-file>
     </welcome-file-list>
 
 

@@ -1,21 +1,53 @@
 package com.movieticket.model;
 
+import jakarta.persistence.*;
+
 import java.sql.Date;
 import java.sql.Time;
 
 
+@Entity
+@Table(name = "movies")
 public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id")
     private int movieId;
+
+    @Column(name = "img_url")
     private String imgUrl;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genre")
     private Genre genre;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language")
     private Language language;
+
+    @Column(name = "duration")
     private Time duration;
+
+    @Column(name = "price")
     private int price;
+
+    @Column(name = "rating")
     private int rating;
+
+    @Column(name = "number_of_seats")
     private int numberOfSeats;
+
+    @Column(name = "show_time")
     private Time showTime;
+
+    @Column(name = "show_date")
     private Date showDate;
     public enum Genre {
         ACTION, COMEDY, DRAMA, HORROR, SCIENCE, ROMANCE,

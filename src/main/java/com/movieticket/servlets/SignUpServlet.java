@@ -30,13 +30,9 @@ public class SignUpServlet extends HttpServlet {
 
         if (username != null && !username.isEmpty() && email != null && !email.isEmpty() && password != null && !password.isEmpty()) {
             User newUser = new User(username, email, password, UserRole.user);
-            try {
-                userDAO.addUser(newUser);
-                response.sendRedirect("login");
-                return;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            userDAO.addUser(newUser);
+            response.sendRedirect("login");
+            return;
         }
         response.sendRedirect("signup?error=1");
     }
