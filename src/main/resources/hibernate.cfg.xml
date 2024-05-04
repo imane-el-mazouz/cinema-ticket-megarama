@@ -8,8 +8,8 @@
         <!-- Set URL -->
         <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/cinema_ticket_megarama?createDatabaseIfNotExist=true</property>
 
-        <!-- Set User Name -->
-        <property name = "hibernate.connection.username">imane</property>
+
+        <property name = "hibernate.connection.username">root</property>
 
         <!-- Set Password -->
         <property name = "hibernate.connection.password">1234</property>
