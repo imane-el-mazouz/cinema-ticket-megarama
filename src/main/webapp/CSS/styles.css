@@ -333,6 +333,7 @@ body.active { overflow: hidden; }
 
 .movies-list {
     display: grid;
+    gap: 50px;
 }
 
 .movie-card {

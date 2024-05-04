@@ -42,6 +42,33 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AddReactionServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.AddReactionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddReactionServlet</servlet-name>
+        <url-pattern>/user/addReaction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisplayReactionsServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.DisplayReactionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayReactionsServlet</servlet-name>
+        <url-pattern>/user/allReaction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteReactionServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.DeleteReactionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteReactionServlet</servlet-name>
+        <url-pattern>/user/deleteReaction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AllReservationServlet</servlet-name>
         <servlet-class>com.movieticket.servlets.user.AllReservationServlet</servlet-class>
     </servlet>

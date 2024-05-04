@@ -2,8 +2,8 @@ package com.movieticket.model;
 
 public class ReactionMovie {
     private int reactionMovieId;
-    private int userId;
-    private int movieId;
+    private User user;
+    private Movie movie;
     private int rating;
     private String comment;
     public ReactionMovie() {}
@@ -18,18 +18,23 @@ public class ReactionMovie {
     public void setReactionMovieId(int reactionMovieId) {
         this.reactionMovieId = reactionMovieId;
     }
-    public int getUserId() {
-        return userId;
+
+    public User getUser() {
+        return user;
     }
-    public void setUserId(int userId) {
-        this.userId = userId;
+
+    public void setUser(User user) {
+        this.user = user;
     }
-    public int getMovieId() {
-        return movieId;
+
+    public Movie getMovie() {
+        return movie;
     }
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
+
     public int getRating() {
         return rating;
     }

@@ -25,6 +25,6 @@
         <mapping class="com.movieticket.model.User"/>
         <mapping class="com.movieticket.model.Reservation"/>
         <mapping class="com.movieticket.model.AvailableSeats"/>
-
+        <mapping class="com.movieticket.model.ReactionMovie"/>
     </session-factory>
 </hibernate-configuration>
