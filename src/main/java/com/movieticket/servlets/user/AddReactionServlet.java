@@ -21,6 +21,7 @@ public class AddReactionServlet extends HttpServlet {
     private final MovieDAO movieDAO;
     private final UserDAO userDAO;
     private final ReservationDAO reservationDAO;
+    /////////////////////
     private final AvailableSeatDAO availableSeatDAO;
     private final ReactionMovieDAO reactionMovieDAO;
 
