@@ -7,23 +7,22 @@ import com.movieticket.model.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 
 public class ReservationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final MovieDAO movieDAO;
+    private final UserDAO userDAO;
     private final ReservationDAO reservationDAO;
     private final AvailableSeatDAO availableSeatDAO;
 
     public ReservationServlet() {
         super();
         movieDAO = new MovieDAOImpl();
+        userDAO = new UserDAOImpl();
         reservationDAO = new ReservationDAOImp();
         availableSeatDAO = new AvailableSeatDAOImpl();
     }
@@ -31,19 +30,18 @@ public class ReservationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int userId = (int) session.getAttribute("userId");
+        int userId = (int) session.getAttribute("userID");
+        User user = userDAO.getUserById(userId);
         int movieId = Integer.parseInt(request.getParameter("movieId"));
+        Movie movie = movieDAO.getMovieById(movieId);
 
-        List<AvailableSeat> availableSeats = availableSeatDAO.getAllSeats().stream()
-                .filter(seat -> seat.getMovieId() == movieId) .collect(Collectors.toList());
+        List<AvailableSeats> availableSeats = availableSeatDAO.getAllSeats(movie);
         request.setAttribute("availableSeats", availableSeats);
+        Movie selectedMovie = movieDAO.getMovieById(movieId);
+        request.setAttribute("selectedMovie", selectedMovie);
 
-        int price = movieDAO.getPrice(movieId);
-        request.setAttribute("price", price);
-        String title = movieDAO.getName(movieId);
-        request.setAttribute("userId", userId);
-        request.setAttribute("movieId", movieId);
-        request.setAttribute("title", title);
+        request.setAttribute("userId", user);
+        request.setAttribute("movieId", movie);
 
         request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
     }
@@ -52,18 +50,26 @@ public class ReservationServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
+        User user = userDAO.getUserById(userId);
         int movieId = Integer.parseInt(request.getParameter("movieId"));
+        Movie movie = movieDAO.getMovieById(movieId);
+
         String[] selectedSeats = request.getParameterValues("selectedSeats");
-        int price = movieDAO.getPrice(movieId);
+        int price = movieDAO.getPrice(movie);
         for (String seatNumber : selectedSeats) {
-            reservationDAO.addReservation(userId, movieId, seatNumber, price);
+            AvailableSeats seat = availableSeatDAO.getSeatByNumber(seatNumber);
+            reservationDAO.addReservation(user, movie, seat, price);
         }
 
+        List<AvailableSeats> availableSeats = availableSeatDAO.getAllSeats(movie);
+        request.setAttribute("availableSeats", availableSeats);
+        Movie selectedMovie = movieDAO.getMovieById(movieId);
+        request.setAttribute("selectedMovie", selectedMovie);
 
-        // Get all reservations for the current user from the DAO
-        List<Reservation> userReservations = reservationDAO.getPreviousReservations(userId);
-        request.setAttribute("previousReservations", userReservations);
-        request.getRequestDispatcher("/user/reservations").forward(request, response);
+        request.setAttribute("userId", user);
+        request.setAttribute("movieId", movie);
+        request.setAttribute("successMessage", "Congratulations! Your reservation has been successfully confirmed.");
+        request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
     }
 
 }

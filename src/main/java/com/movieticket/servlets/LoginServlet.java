@@ -34,26 +34,20 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        try {
-            User user = userDAO.getUserByUsernameAndPassword(username, password);
+        User user = userDAO.getUserByUsernameAndPassword(username, password);
 
-            if (user != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                session.setAttribute("userID", user.getUserId());
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setAttribute("userID", user.getUserId());
 
-                if (user.getRole() == UserRole.admin) {
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/movies");
-                }
+            if (user.getRole() == UserRole.admin) {
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
             } else {
-                request.setAttribute("error", "Invalid username or password. Please try again.");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/movie");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("error", "An error occurred. Please try again later.");
+        } else {
+            request.setAttribute("error", "Invalid username or password. Please try again.");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }

@@ -24,7 +24,7 @@
 <header class="header" data-header>
     <div class="container">
         <div class="overlay" data-overlay></div>
-        <a href="movies" class="logo">
+        <a href="movie" class="logo">
             <img src="../images/logo.png" height="50px" alt="Cinema-TV">
         </a>
         <div class="header-actions">
@@ -40,7 +40,7 @@
         </button>
         <nav class="navbar" data-navbar>
             <div class="navbar-top">
-                <a href="movies" class="logo">
+                <a href="movie" class="logo">
                     <img src="../images/logo.png" alt="Cinema LOgo">
                 </a>
                 <button class="menu-close-btn" data-menu-close-btn>
@@ -49,7 +49,7 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="${pageContext.request.contextPath}/movies" class="navbar-link">Movies</a>
+                    <a href="${pageContext.request.contextPath}/movie" class="navbar-link">Movies</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/user/reserve" class="navbar-link">Reserve Ticket</a>

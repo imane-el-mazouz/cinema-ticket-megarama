@@ -104,3 +104,13 @@ container.addEventListener('click', (e) => {
 });
 
 updateSelectedCount();
+
+//alert
+//Affichage de l'alerte d'erreur
+if (error != null && !error.isEmpty()){
+    alert("=error");}
+
+//Affichage de l'alerte de succès
+if (successMessage != null && !successMessage.isEmpty()) {
+    alert("=successMessage");
+}

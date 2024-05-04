@@ -1,11 +1,12 @@
 package com.movieticket.dao;
 
-import com.movieticket.model.AvailableSeat;
+import com.movieticket.model.AvailableSeats;
+import com.movieticket.model.Movie;
 
 import java.util.List;
 
 public interface AvailableSeatDAO {
-    List<AvailableSeat> getAllSeats();
-    AvailableSeat getSeat(int id);
-    void updateSeat(AvailableSeat seat);
+    List<AvailableSeats> getAllSeats(Movie movieId);
+    AvailableSeats getSeatByNumber(String seatNumber);
+    void updateSeat(AvailableSeats seat);
 }

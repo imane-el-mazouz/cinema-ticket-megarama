@@ -1,199 +1,125 @@
 package com.movieticket.dao;
 
-import com.Connection.DatabaseManager;
+import com.Connection.HibernateConf;
 import com.movieticket.model.Movie;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDAOImpl implements MovieDAO {
-    @Override
-    public void deleteMovie(int movieId) throws SQLException {
-        String sql = "DELETE FROM movies WHERE movie_id = ?"; // Assuming your primary key column is 'movie_id'
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, movieId);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw e; // Re-throw the exception to be handled by the servlet
-        }
-    }
+    private SessionFactory factory = HibernateConf.getFactory();
 
     @Override
-    public List<Movie> getAllMovies() throws SQLException {
+    public List<Movie> getAllMovies(){
         List<Movie> movies = new ArrayList<>();
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM movies");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                int movieId = resultSet.getInt("movie_id");
-                String imgUrl = resultSet.getString("img_url");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                Movie.Genre genreStr = Movie.Genre.valueOf(resultSet.getString("genre").toUpperCase());
-                Movie.Language language = Movie.Language.valueOf(resultSet.getString("language"));
-                java.sql.Time duration = resultSet.getTime("duration");
-                int price = resultSet.getInt("price");
-                int rating = resultSet.getInt("rating");
-                int numberOfSeats = resultSet.getInt("number_of_seats");
-                java.sql.Time showTime = resultSet.getTime("show_time");
-                java.sql.Date showDate = resultSet.getDate("show_date");
-
-                Movie movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate);
-                movies.add(movie);
-            }
-        } catch (SQLException e) {
-            throw e;
+        try (Session session = factory.openSession()) {
+            movies = session.createQuery("FROM Movie", Movie.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return movies;
     }
 
-    public Movie getMovieById(int movieId) throws SQLException {
+    @Override
+    public Movie getMovieById(int movieId){
         Movie movie = null;
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM movies WHERE movie_id = ?");
-        ) {
-            statement.setInt(1, movieId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String imgUrl = resultSet.getString("img_url");
-                    String title = resultSet.getString("title");
-                    String description = resultSet.getString("description");
-                    Movie.Genre genreStr = Movie.Genre.valueOf(resultSet.getString("genre").toUpperCase());
-                    Movie.Language language = Movie.Language.valueOf(resultSet.getString("language"));
-                    java.sql.Time duration = resultSet.getTime("duration");
-                    int price = resultSet.getInt("price");
-                    int rating = resultSet.getInt("rating");
-                    int numberOfSeats = resultSet.getInt("number_of_seats");
-                    java.sql.Time showTime = resultSet.getTime("show_time");
-                    java.sql.Date showDate = resultSet.getDate("show_date");
-
-                    movie = new Movie(movieId, imgUrl, title, description, genreStr, language, duration, price, rating, numberOfSeats, showTime, showDate);
-                }
-            }
-        } catch (SQLException e) {
-            throw e;
+        try (Session session = factory.openSession()) {
+            movie = session.get(Movie.class, movieId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return movie;
     }
 
-
     @Override
-    public List<Movie> getRatingMovies() throws SQLException {
+    public List<Movie> getRatingMovies(){
         List<Movie> movies = new ArrayList<>();
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM movies WHERE rating > 8 ORDER BY rating DESC");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                int movie_id = resultSet.getInt("movie_id");
-                String img_url = resultSet.getString("img_url");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                Movie.Genre genreStr = Movie.Genre.valueOf(resultSet.getString("genre").toUpperCase());
-                Movie.Language language = Movie.Language.valueOf(resultSet.getString("language"));
-                java.sql.Time duration = resultSet.getTime("duration");
-                int price = resultSet.getInt("price");
-                int rating = resultSet.getInt("rating");
-                int number_of_seats = resultSet.getInt("number_of_seats");
-                java.sql.Time show_time = resultSet.getTime("show_time");
-                java.sql.Date show_date = resultSet.getDate("show_date");
-
-                Movie movie = new Movie(movie_id, img_url, title, description, genreStr, language, duration, price, rating, number_of_seats, show_time, show_date);
-                movies.add(movie);
-            }
-        } catch (SQLException e) {
-            throw e;
+        try (Session session = factory.openSession()) {
+            Query query = session.createQuery("FROM Movie WHERE rating > 8 ORDER BY rating DESC");
+            movies = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return movies;
     }
 
     @Override
-    public int getPrice(int movieId) {
-        String sql = "SELECT price FROM movies WHERE movie_id = ?";
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, movieId);
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("price");
+    public int getPrice(Movie movieId) {
+        int price = 0;
+        try (Session session = factory.openSession()) {
+            Movie movie = session.get(Movie.class, movieId);
+            if (movie != null) {
+                price = movie.getPrice();
             }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching movie price: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return 0; // Retourner 0 si le prix n'a pas pu être récupéré
+        return price;
     }
 
     @Override
-    public String getName(int movieId) {
-        String sql = "SELECT name FROM movies WHERE movie_id = ?";
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, movieId);
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("name");
+    public String getName(Movie movieId) {
+        String name = null;
+        try (Session session = factory.openSession()) {
+            Movie movie = session.get(Movie.class, movieId);
+            if (movie != null) {
+                name = movie.getTitle();
             }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching movie name: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return null; // Retourner null si le nom n'a pas pu être récupéré
+        return name;
     }
 
     @Override
-    public void searchMovie(String title) throws SQLException {
-        try(Connection connection = DatabaseManager.getConnection();
-            PreparedStatement statement= connection.prepareStatement(
-                    "SELECT * FROM movies WHERE title = ?")){
-            statement.setString(1,title);
-
+    public void deleteMovie(Movie movieId){
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            Movie movie = session.get(Movie.class, movieId);
+            if (movie != null) {
+                session.delete(movie);
+                transaction.commit();
             }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
 
+    @Override
+    public List<Movie> searchMovie(String title){
+        List<Movie> movies = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            Query query = session.createQuery("FROM Movie WHERE title = :title");
+            query.setParameter("title", title);
+            movies = query.getResultList();
+            // Handle search results here
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return movies;
+    }
 
     @Override
-    public void addMovie(Movie movie) throws SQLException {
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO movies (img_url, title, description, genre, language, duration, price, rating, number_of_seats, show_time, show_date) " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-
-            statement.setString(1, movie.getImgUrl());
-            statement.setString(2, movie.getTitle());
-            statement.setString(3, movie.getDescription());
-            statement.setString(4, movie.getGenre().toString());
-            statement.setString(5, movie.getLanguage().toString());
-            statement.setTime(6, movie.getDuration());
-            statement.setInt(7, movie.getPrice());
-            statement.setInt(8, movie.getRating());
-            statement.setInt(9, movie.getNumberOfSeats());
-            statement.setTime(10, movie.getShowTime());
-            statement.setDate(11, movie.getShowDate());
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
+    public void addMovie(Movie movie){
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.save(movie);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
         }
-
     }
 }

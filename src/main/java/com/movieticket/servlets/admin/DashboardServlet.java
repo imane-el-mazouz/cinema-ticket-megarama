@@ -5,7 +5,6 @@ import com.movieticket.dao.MovieDAOImpl;
 import com.movieticket.model.Movie;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,20 +29,17 @@ public class DashboardServlet extends HttpServlet {
         if ("delete".equals(action)) {
             try {
                 int movieId = Integer.parseInt(request.getParameter("id"));
-                movieDAO.deleteMovie(movieId);
-            } catch (SQLException | NumberFormatException e) {
+                Movie movie = movieDAO.getMovieById(movieId);
+                movieDAO.deleteMovie(movie);
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
 
         // Fetch and display movies (same as before)
-        try {
-            List<Movie> allMovies = movieDAO.getAllMovies();
-            request.setAttribute("movies", allMovies);
-            request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
-        } catch (SQLException e) {
-            throw new ServletException("Error fetching movies from database", e);
-        }
+        List<Movie> allMovies = movieDAO.getAllMovies();
+        request.setAttribute("movies", allMovies);
+        request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
     }
 
     @Override

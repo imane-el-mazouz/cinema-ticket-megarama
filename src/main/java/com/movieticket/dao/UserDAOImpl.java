@@ -1,101 +1,92 @@
 package com.movieticket.dao;
 
-import com.Connection.DatabaseManager;
+import com.Connection.HibernateConf;
 import com.movieticket.model.User;
 import com.movieticket.model.UserRole;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
+    private SessionFactory factory = HibernateConf.getFactory();
 
     @Override
-    public void addUser(User user) throws SQLException {
-        String query = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, ?)";
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, user.getUserName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getRole().name());
-            statement.executeUpdate();
+    public void addUser(User user) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                if (resultSet.next()) {
-                    user.setUserId(resultSet.getInt(1));
-                }
+
+    @Override
+    public void updateUser(User user) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void deleteUser(int userId) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            User user = session.get(User.class, userId);
+            if (user != null) {
+                session.delete(user);
             }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+
     @Override
-    public void updateUser(User user) throws SQLException {
-        String query = "UPDATE users SET user_name=?, email=?, password=?, role=? WHERE user_id=?";
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, user.getUserName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getRole().name());
-            statement.setInt(5, user.getUserId());
-            statement.executeUpdate();
+    public User getUserByUsernameAndPassword(String username, String password) {
+        try (Session session = factory.openSession()) {
+            Query<User> query = session.createQuery("FROM User WHERE userName = :username AND password = :password", User.class);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
+
     @Override
-    public void deleteUser(int userId) throws SQLException {
-        String query = "DELETE FROM users WHERE user_id=?";
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, userId);
-            statement.executeUpdate();
+    public User getUserById(int userId){
+        User user = null;
+        try (Session session = factory.openSession()) {
+            user = session.get(User.class, userId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return user;
     }
 
     @Override
-    public User getUserByUsernameAndPassword(String username, String password) throws SQLException {
-        String query = "SELECT * FROM users WHERE user_name=? AND password=?";
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return extractUserFromResultSet(resultSet);
-                }
-            }
+    public List<User> getAllUsers() {
+        try (Session session = factory.openSession()) {
+            return session.createQuery("FROM User", User.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
         }
-        return null;
-    }
-
-    @Override
-    public User getUserById(int userId) throws SQLException {
-        String query = "SELECT * FROM users WHERE user_id=?";
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, userId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return extractUserFromResultSet(resultSet);
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public List<User> getAllUsers() throws SQLException {
-        List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM users";
-        try (Connection connection = DatabaseManager.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                users.add(extractUserFromResultSet(resultSet));
-            }
-        }
-        return users;
     }
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {

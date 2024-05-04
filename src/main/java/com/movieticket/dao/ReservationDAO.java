@@ -1,13 +1,13 @@
 package com.movieticket.dao;
 
+import com.movieticket.model.AvailableSeats;
+import com.movieticket.model.Movie;
 import com.movieticket.model.Reservation;
+import com.movieticket.model.User;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ReservationDAO {
-    int calculatePrice(int movieId, int numberOfSeats);
-    void addReservation(int userId, int movieId, String seatNumber, int priceTotal);
-    List<Reservation> getPreviousReservations(int userId);
+    void addReservation(User userId, Movie movieId, AvailableSeats seat, int priceTotal);
+    List<Reservation> getPreviousReservations(User userId);
 }

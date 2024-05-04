@@ -1,82 +1,61 @@
 package com.movieticket.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Connection.DatabaseManager;
-import com.movieticket.model.AvailableSeat;
+import com.Connection.HibernateConf;
+import com.movieticket.model.AvailableSeats;
+import com.movieticket.model.Movie;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class AvailableSeatDAOImpl implements AvailableSeatDAO{
+    private SessionFactory factory = HibernateConf.getFactory();
+
     @Override
-    public List<AvailableSeat> getAllSeats() {
-        List<AvailableSeat> seats = new ArrayList<>();
-        String sql = "SELECT * FROM available_seats";
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                AvailableSeat seat = new AvailableSeat();
-                seat.setAvailableSeatId(rs.getInt("available_seat_id"));
-                seat.setMovieId(rs.getInt("movie_id"));
-                seat.setSeatNumber(rs.getString("seat_number"));
-                seat.setAvailable(rs.getBoolean("is_available"));
-                seats.add(seat);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching seats: " + e.getMessage());
+    public List<AvailableSeats> getAllSeats(Movie movie) {
+        List<AvailableSeats> seats = new ArrayList<>();
+        try (Session session = HibernateConf.getFactory().openSession()) {
+            Query<AvailableSeats> query = session.createQuery("FROM AvailableSeats AS s WHERE s.movie = :movie", AvailableSeats.class);
+            query.setParameter("movie", movie);
+            seats = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return seats;
     }
 
     @Override
-    public AvailableSeat getSeat(int id) {
-        AvailableSeat seat = null;
-        String sql = "SELECT * FROM available_seats WHERE available_seat_id = ?";
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                seat = new AvailableSeat();
-                seat.setAvailableSeatId(rs.getInt("available_seat_id"));
-                seat.setMovieId(rs.getInt("movie_id"));
-                seat.setSeatNumber(rs.getString("seat_number"));
-                seat.setAvailable(rs.getBoolean("is_available"));
+    public AvailableSeats getSeatByNumber(String seatNumber) {
+        AvailableSeats seat = null;
+        try (Session session = HibernateConf.getFactory().openSession()) {
+            String hql = "FROM AvailableSeats AS s WHERE s.seatNumber = :seatNumber";
+            Query<AvailableSeats> query = session.createQuery(hql, AvailableSeats.class);
+            query.setParameter("seatNumber", seatNumber);
+            List<AvailableSeats> seats = query.list();
+            if (!seats.isEmpty()) {
+                seat = seats.get(0); // Prendre le premier siège trouvé
             }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching seat: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
         return seat;
     }
 
+
     @Override
-    public void updateSeat(AvailableSeat seat) {
-        String sql = "UPDATE available_seats SET movie_id = ?, seat_number = ?, is_available = ? WHERE available_seat_id = ?";
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, seat.getMovieId());
-            statement.setString(2, seat.getSeatNumber());
-            statement.setBoolean(3, seat.isAvailable());
-            statement.setInt(4, seat.getAvailableSeatId());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
+    public void updateSeat(AvailableSeats seat) {
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.update(seat);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             System.err.println("Error updating seat: " + e.getMessage());
         }
     }

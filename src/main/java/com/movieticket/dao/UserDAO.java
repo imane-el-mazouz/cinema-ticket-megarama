@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDAO {
-    void addUser(User user) throws SQLException;
-    void updateUser(User user) throws SQLException;
-    void deleteUser(int userId) throws SQLException;
-    User getUserByUsernameAndPassword(String username, String password) throws SQLException;
-    User getUserById(int userId) throws SQLException;
-    List<User> getAllUsers() throws SQLException;
+    void addUser(User user);
+    void updateUser(User user);
+    void deleteUser(int userId);
+    User getUserByUsernameAndPassword(String username, String password);
+    User getUserById(int userId);
+    List<User> getAllUsers();
 }

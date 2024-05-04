@@ -1,25 +1,32 @@
 package com.movieticket.model;
+import jakarta.persistence.*;
 
-import java.util.Arrays;
-
+@Entity
+@Table(name = "reservations")
 public class Reservation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id")
     private int reservationId;
-    private int userId;
-    private int movieId;
-    private int[] selectedSeats;
-    private String[] reservedSeatNumbersArray;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movieId;
+
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
+    private AvailableSeats seat;
+
+    @Column(name = "price_total")
     private int priceTotal;
 
     public Reservation() {
     }
-
-    public Reservation(int userId, int movieId, int[] selectedSeats, int priceTotal) {
-        this.userId = userId;
-        this.movieId = movieId;
-        this.selectedSeats = selectedSeats;
-        this.priceTotal = priceTotal;
-    }
-
 
     public int getReservationId() {
         return reservationId;
@@ -29,28 +36,28 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
-    public int getMovieId() {
+    public Movie getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieId(Movie movieId) {
         this.movieId = movieId;
     }
 
-    public int[] getSelectedSeats() {
-        return selectedSeats;
+    public AvailableSeats getSeat() {
+        return seat;
     }
 
-    public void setSelectedSeats(int[] selectedSeats) {
-        this.selectedSeats = selectedSeats;
+    public void setSeat(AvailableSeats seat) {
+        this.seat = seat;
     }
 
     public int getPriceTotal() {
