@@ -1,19 +1,27 @@
 package com.movieticket.model;
 
-public class AvailableSeat {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "available_seats")
+public class AvailableSeats {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "available_seat_id")
     private int availableSeatId;
-    private int movieId;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    @Column(name = "seat_number")
     private String seatNumber;
+
+    @Column(name = "is_available")
     private boolean isAvailable;
 
-    public AvailableSeat() {
-    }
-
-    public AvailableSeat(int availableSeatId, int movieId, String seatNumber, boolean isAvailable) {
-        this.availableSeatId = availableSeatId;
-        this.movieId = movieId;
-        this.seatNumber = seatNumber;
-        this.isAvailable = isAvailable;
+    public AvailableSeats() {
     }
 
     public int getAvailableSeatId() {
@@ -24,12 +32,12 @@ public class AvailableSeat {
         this.availableSeatId = availableSeatId;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public String getSeatNumber() {

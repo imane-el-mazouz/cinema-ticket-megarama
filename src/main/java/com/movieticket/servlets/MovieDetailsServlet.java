@@ -22,18 +22,14 @@ public class MovieDetailsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            int movieId = Integer.parseInt(request.getParameter("movieId"));
-            Movie selectedMovie = movieDAO.getMovieById(movieId);
-            request.setAttribute("selectedMovie", selectedMovie);
-            
+        int movieId = Integer.parseInt(request.getParameter("movieId"));
+        Movie selectedMovie = movieDAO.getMovieById(movieId);
+        request.setAttribute("selectedMovie", selectedMovie);
 
-            List<Movie> getAllMovies = movieDAO.getAllMovies();
-            request.setAttribute("getAllMovies", getAllMovies);
-            request.getRequestDispatcher("/movie-details.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        List<Movie> getAllMovies = movieDAO.getAllMovies();
+        request.setAttribute("getAllMovies", getAllMovies);
+        request.getRequestDispatcher("/movie-details.jsp").forward(request, response);
     }
 
 

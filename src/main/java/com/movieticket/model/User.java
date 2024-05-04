@@ -1,14 +1,32 @@
 package com.movieticket.model;
 
+import jakarta.persistence.*;
+
+import javax.management.relation.Role;
+
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private UserRole role;
 
-    public User() {
-    }
 
     public User(String userName, String email, String password, UserRole role) {
         this.userName = userName;
@@ -17,7 +35,9 @@ public class User {
         this.role = role;
     }
 
+    public User() {
 
+    }
 
     public int getUserId() {
         return userId;
