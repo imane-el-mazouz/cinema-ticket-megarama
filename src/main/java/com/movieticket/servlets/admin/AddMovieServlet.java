@@ -27,6 +27,7 @@ public class AddMovieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String img_url = request.getParameter("img_url");
+            String bg_img_url = request.getParameter("bg_img_url");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             Movie.Genre genre = Movie.Genre.valueOf(request.getParameter("genre"));
@@ -41,7 +42,7 @@ public class AddMovieServlet extends HttpServlet {
             java.sql.Date show_date = java.sql.Date.valueOf(request.getParameter("show_date"));
 
 
-            Movie movie = new Movie(img_url, title, description, genre, language, duration, price, 0, number_of_seats, show_time, show_date);
+            Movie movie = new Movie(img_url,bg_img_url, title, description, genre, language, duration, price, 0, number_of_seats, show_time, show_date);
 
             movieDAO.addMovie(movie);
             response.sendRedirect(request.getContextPath() + "/movies");

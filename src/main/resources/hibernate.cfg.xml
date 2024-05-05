@@ -5,16 +5,12 @@
 <hibernate-configuration>
     <session-factory>
 
-        <!-- Set URL -->
         <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/cinema_ticket_megarama?createDatabaseIfNotExist=true</property>
 
-        <!-- Set User Name -->
-        <property name = "hibernate.connection.username">root</property>
+        <property name = "hibernate.connection.username">imane</property>
 
-        <!-- Set Password -->
-        <property name = "hibernate.connection.password">1234</property>
+        <property name = "hibernate.connection.password"></property>
 
-        <!-- Set Driver Name -->
         <property name = "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
         <property name = "hibernate.show_sql">true</property>
@@ -26,5 +22,6 @@
         <mapping class="com.movieticket.model.Reservation"/>
         <mapping class="com.movieticket.model.AvailableSeats"/>
         <mapping class="com.movieticket.model.ReactionMovie"/>
+        <mapping class="com.movieticket.model.MovieActor"/>
     </session-factory>
 </hibernate-configuration>

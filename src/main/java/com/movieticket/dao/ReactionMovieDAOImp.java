@@ -77,5 +77,4 @@ public class ReactionMovieDAOImp implements ReactionMovieDAO {
         return reactions;
     }
 
-
 }

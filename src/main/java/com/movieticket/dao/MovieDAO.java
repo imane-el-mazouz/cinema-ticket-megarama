@@ -14,4 +14,5 @@ public interface MovieDAO {
     int getPrice(Movie movieId);
     String getName(Movie movieId);
     List<Movie> searchMovie(String title);
+    List<Movie> getRecommendedMovies();
 }

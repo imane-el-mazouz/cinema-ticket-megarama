@@ -18,6 +18,9 @@ public class Movie {
     @Column(name = "img_url")
     private String imgUrl;
 
+    @Column(name = "bg_img_url")
+    private String bgImgUrl;
+
     @Column(name = "title")
     private String title;
 
@@ -60,9 +63,10 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(int movieId, String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
+    public Movie(int movieId, String imgUrl, String bgImgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
         this.movieId = movieId;
         this.imgUrl = imgUrl;
+        this.bgImgUrl = bgImgUrl;
         this.title = title;
         this.description = description;
         this.genre = genre;
@@ -76,9 +80,10 @@ public class Movie {
     }
 
 
-    public Movie(String imgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
+    public Movie(String imgUrl, String bgImgUrl, String title, String description, Genre genre, Language language, Time duration, int price, int rating, int numberOfSeats, Time showTime, Date showDate) {
 
         this.imgUrl = imgUrl;
+        this.bgImgUrl = bgImgUrl;
         this.title = title;
         this.description = description;
         this.genre = genre;
@@ -106,6 +111,10 @@ public class Movie {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
+    public String getBgImgUrl() { return bgImgUrl; }
+
+    public void setBgImgUrl(String bgImgUrl) { this.bgImgUrl = bgImgUrl; }
 
     public String getTitle() {
         return title;

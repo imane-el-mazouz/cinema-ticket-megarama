@@ -14,6 +14,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Style pour le bouton Payer */
+        .butn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .butn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body id="#top">
@@ -29,6 +46,11 @@
             <img src="images/logo.png" height="50px" alt="Cinema-TV">
         </a>
         <div class="header-actions">
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPanier()"><i class="fas fa-shopping-cart"></i> Panier</a></li>
+                </ul>
+            </nav>
             <button class="search-btn">
                 <ion-icon name="search-outline"></ion-icon>
             </button>
@@ -99,7 +121,7 @@
             <div class="container">
                 <h2 class="h2 section-title">Top Rated Movies</h2>
                 <ul class="movies-list">
-                    <c:forEach var="movie" items="${ratingMovies}">
+                    <c:forEach var="movie" items="${getRecommendedMovies}">
                         <li>
                             <div class="movie-card">
                                 <a href="${pageContext.request.contextPath}/details?movieId=${movie.getMovieId()}">
@@ -128,6 +150,10 @@
                                         <data>${movie.getRating()}</data>
                                     </div>
                                 </div>
+                                <form action="${pageContext.request.contextPath}/panier" method="post">
+                                <button class="butn" type="submit" name="movieId" value="${movie.getMovieId()}">Ajouter au Panier</button>
+                            </form>
+
                             </div>
                         </li>
                     </c:forEach>
@@ -237,6 +263,55 @@
 <a href="#top" class="go-top" data-go-top>
     <ion-icon name="chevron-up"></ion-icon>
 </a>
+<div id="PanierModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDeleteForm()">&times;</span>
+        <h2>Panier</h2>
+        <div id="panier-content" class="panier-content"></div>
+        <b action="${pageContext.request.contextPath}/Payer" method="post">
+        </b>
+            <div class="details-produit">
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>Show date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>mohamed</th>
+                        <th>med</th>
+                        <th>2020</th>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div >
+                    <h3>Totale : </h3>
+
+                    <button>Payer</button>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+            <script>
+                function showPanier() {
+                    //document.getElementById('idDeleteCategorie').value = categorieId;
+                    document.getElementById('PanierModal').style.display = 'block';
+                }
+
+                function closeDeleteForm() {
+                    document.getElementById('PanierModal').style.display = 'none';
+                }
+
+            </script>
 <!--
   - custom js link
 -->
@@ -246,6 +321,7 @@
 -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
 </body>
 </html>
