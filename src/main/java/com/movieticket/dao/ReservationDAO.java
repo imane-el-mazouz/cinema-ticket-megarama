@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ReservationDAO {
     void addReservation(User userId, Movie movieId, AvailableSeats seat, int priceTotal);
-    List<Reservation> getPreviousReservations(User userId);
+    List<Object[]> getReservationDetails(int userId);
 }

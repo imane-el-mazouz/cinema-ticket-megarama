@@ -1,9 +1,6 @@
 package com.movieticket.servlets.user;
 
-import com.movieticket.dao.ReservationDAO;
-import com.movieticket.dao.ReservationDAOImp;
-import com.movieticket.dao.UserDAO;
-import com.movieticket.dao.UserDAOImpl;
+import com.movieticket.dao.*;
 import com.movieticket.model.Movie;
 import com.movieticket.model.Reservation;
 import com.movieticket.model.User;
@@ -30,12 +27,16 @@ public class AllReservationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userID");
-        User user = userDAO.getUserById(userId);
 
-        List<Reservation> userReservations = reservationDAO.getPreviousReservations(user);
-
-        request.setAttribute("userReservations", userReservations);
+        List<Object[]> reservationDetails = reservationDAO.getReservationDetails(userId);
+        request.setAttribute("reservationDetails", reservationDetails);
 
         request.getRequestDispatcher("/user/reservations-history.jsp").forward(request, response);
     }
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
 }

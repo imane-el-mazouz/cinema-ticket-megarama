@@ -2,10 +2,7 @@ package com.movieticket.servlets.user;
 
 
 import com.movieticket.dao.*;
-import com.movieticket.model.AvailableSeats;
-import com.movieticket.model.Movie;
-import com.movieticket.model.ReactionMovie;
-import com.movieticket.model.User;
+import com.movieticket.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +18,7 @@ public class AddReactionServlet extends HttpServlet {
     private final MovieDAO movieDAO;
     private final UserDAO userDAO;
     private final ReservationDAO reservationDAO;
-    /////////////////////
-    private final AvailableSeatDAO availableSeatDAO;
+    private final MovieActorDAO movieActorDAO;
     private final ReactionMovieDAO reactionMovieDAO;
 
     public AddReactionServlet() {
@@ -30,10 +26,9 @@ public class AddReactionServlet extends HttpServlet {
         movieDAO = new MovieDAOImpl();
         userDAO = new UserDAOImpl();
         reservationDAO = new ReservationDAOImp();
-        availableSeatDAO = new AvailableSeatDAOImpl();
+        movieActorDAO = new MovieActorDAOImpl();
         reactionMovieDAO = new ReactionMovieDAOImp();
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
@@ -42,7 +37,6 @@ public class AddReactionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            int reactionMovieId = Integer.parseInt(request.getParameter("reactionMovieId"));
             HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("userID");
             User user = userDAO.getUserById(userId);
@@ -51,20 +45,17 @@ public class AddReactionServlet extends HttpServlet {
             int rating = Integer.parseInt(request.getParameter("rating"));
             String comment = request.getParameter("comment");
 
-            ReactionMovie reactionMovie = new ReactionMovie();
-            reactionMovie.setReactionMovieId(reactionMovieId);
-            reactionMovie.setUser(user);
-            reactionMovie.setMovie(movie);
-            reactionMovie.setRating(rating);
-            reactionMovie.setComment(comment);
+            ReactionMovie reactionMovie = new ReactionMovie(user, movie, rating, comment);
 
             reactionMovieDAO.addReactionMovie(reactionMovie);
-            response.sendRedirect(request.getContextPath() + "/movie-details");
+
+            response.sendRedirect(request.getContextPath() + "/details?movieId=" + request.getParameter("movieId"));
+
         } catch (NumberFormatException | NullPointerException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add reaction movie.");
             request.getRequestDispatcher("").forward(request, response);
         }
-        }
+    }
 
 }

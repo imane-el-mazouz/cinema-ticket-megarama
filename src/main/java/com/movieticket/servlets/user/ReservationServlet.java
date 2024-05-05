@@ -61,15 +61,7 @@ public class ReservationServlet extends HttpServlet {
             reservationDAO.addReservation(user, movie, seat, price);
         }
 
-        List<AvailableSeats> availableSeats = availableSeatDAO.getAllSeats(movie);
-        request.setAttribute("availableSeats", availableSeats);
-        Movie selectedMovie = movieDAO.getMovieById(movieId);
-        request.setAttribute("selectedMovie", selectedMovie);
-
-        request.setAttribute("userId", user);
-        request.setAttribute("movieId", movie);
         request.setAttribute("successMessage", "Congratulations! Your reservation has been successfully confirmed.");
-        request.getRequestDispatcher("/user/reserve-movie.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/user/reservations?successMessage=" + request.getAttribute("successMessage"));
     }
-
 }

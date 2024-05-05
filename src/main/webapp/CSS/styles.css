@@ -1,14 +1,9 @@
 /*style actors secction*/
 .container-actors{
-    margin: 5%;
+    background-image: url("../images/footer-bg.jpg");
+    padding: 0;
 }
-.single-box {
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: #ffffff57;
-    text-align: center;
-}
+
 .info-area {
     padding: 0 20px 45px;
     font-size: larger;
@@ -18,10 +13,9 @@
     padding: 15px 0 15px;
 }
 .img-area img {
-    margin: 0 auto;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    min-width: 200px
+    width: fit-content;
 }
 
 .move-animation {
@@ -39,6 +33,270 @@
     100% {
         top: 3px;
     }
+}
+
+/*all reservation*/
+.card-my-reservation{
+    display: flex;
+    flex-direction: column;
+    font-family: "Staatliches", cursive;
+    color: black;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.ticket {
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+}
+
+.left {
+    display: flex;
+}
+
+.image {
+    height: 250px;
+    background-size: contain;
+    opacity: 0.85;
+}
+
+
+.admit-one {
+    position: absolute;
+    color: darkgray;
+    height: 250px;
+    padding: 0 10px;
+    letter-spacing: 0.15em;
+    font-size: 0.5rem;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+}
+
+.admit-one span:nth-child(2) {
+    color: white;
+    font-weight: 700;
+}
+
+.left .ticket-number {
+    height: 250px;
+    width: 170px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 5px;
+    font-size: 0.7rem;
+}
+
+.ticket-info {
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px 0;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.date span {
+    width: 100px;
+}
+
+.date span:first-child {
+    text-align: left;
+}
+
+.date span:last-child {
+    text-align: right;
+}
+
+.date .june-29 {
+    color: #ffbf00;
+    font-size: 20px;
+}
+
+.show-name {
+    font-size: 32px;
+    font-family: "Nanum Pen Script", cursive;
+    color: #ffbf00;
+}
+
+.show-name h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #4a437e;
+}
+
+.time {
+    padding: 10px 0;
+    color: #4a437e;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.time span {
+    font-weight: 400;
+    color: gray;
+}
+
+.left .time {
+    font-size: 16px;
+}
+
+
+.location {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid gray;
+}
+
+.location .separator {
+    font-size: 20px;
+}
+
+.right {
+    width: 180px;
+    border-left: 1px dashed #404040;
+}
+
+.right .admit-one {
+    color: darkgray;
+}
+
+.right .admit-one span:nth-child(2) {
+    color: gray;
+}
+
+.right .right-info-container {
+    height: 250px;
+    padding: 10px 10px 10px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.right .show-name h1 {
+    font-size: 18px;
+}
+
+.barcode {
+    height: 100px;
+}
+
+.barcode img {
+    height: 100%;
+}
+
+.right .ticket-number {
+    color: gray;
+}
+
+/*style comment */
+.section-reaction {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.24rem;
+}
+
+.wrapper {
+    width: 10rem;
+    padding: 0.3rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    border-radius: 0.25rem;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+    background-image: radial-gradient(circle at 0 0, #eecb7b, #ffedb2) !important;
+    background-position: 30% 10%, 80% 90%, 0;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(50px);
+}
+
+.wrapper .title {
+    font-weight: bold;
+    font-size: 0.36rem;
+}
+
+.rate-box {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.1rem;
+}
+
+.rate-box input {
+    display: none;
+}
+
+.rate-box input:hover~.star:before {
+    color: rgba(255, 204, 51, 0.5);
+}
+
+.rate-box input:active+.star:before {
+    transform: scale(0.9);
+}
+
+.rate-box input:checked~.star:before {
+    color: #ffcc33;
+    text-shadow: -3px 3px 8px rgba(0, 0, 0, 0.3), -3px 3px 8px rgba(255, 255, 255, 0.8);
+}
+
+textarea {
+    border: none;
+    resize: none;
+    width: 100%;
+    padding: 0.2rem;
+    color: inherit;
+    font-family: inherit;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3), inset -2px -2px 8px rgba(255, 255, 255, 0.8);
+    background-color: rgb(255, 255, 255);
+}
+
+textarea::placeholder {
+    color: #aaa;
+}
+
+textarea:focus {
+    outline-color: #ffcc33;
+}
+
+.submit-btn {
+    padding: 0.2rem 0.5rem;
+    box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.3), -3px 3px 8px rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: rgba(255, 204, 51, 0.8);
+    transition: all 0.2s;
+}
+
+.submit-btn:active {
+    transform: translate(2px, 2px);
 }
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .container-details {
@@ -113,6 +371,18 @@ a{
 .movie-card p {
     margin-bottom: 5px;
 }
+
+
+/*-----------------------------------*\
+ * #style.css
+\*-----------------------------------*/
+
+/**
+ * copyright 2022 @codewithsadee
+ */
+
+
+
 
 
 /*-----------------------------------*\
@@ -1061,7 +1331,6 @@ body.active { overflow: hidden; }
     background-size: cover;
     background-position: center;
     padding-top: 160px;
-    padding-bottom: var(--section-padding);
 }
 
 .movie-detail-banner {
@@ -1071,7 +1340,6 @@ body.active { overflow: hidden; }
     margin-inline: auto;
     border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 50px;
 }
 
 .movie-detail-banner img {
@@ -1691,7 +1959,6 @@ body.active { overflow: hidden; }
      * MOVIE DETAIL
      */
 
-    .movie-detail { padding-bottom: var(--section-padding); }
 
     .movie-detail-content { max-width: 620px; }
 

@@ -1,9 +1,6 @@
 package com.movieticket.servlets;
 
-import com.movieticket.dao.MovieActorDAO;
-import com.movieticket.dao.MovieActorDAOImpl;
-import com.movieticket.dao.MovieDAO;
-import com.movieticket.dao.MovieDAOImpl;
+import com.movieticket.dao.*;
 import com.movieticket.model.Movie;
 import com.movieticket.model.MovieActor;
 
@@ -18,11 +15,14 @@ public class MovieDetailsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final MovieDAO movieDAO;
     private final MovieActorDAO movieActorDAO;
+    private final ReactionMovieDAO reactionMovieDAO;
+
 
     public MovieDetailsServlet() {
         super();
         movieDAO = new MovieDAOImpl();
         movieActorDAO = new MovieActorDAOImpl();
+        reactionMovieDAO = new ReactionMovieDAOImp();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +32,9 @@ public class MovieDetailsServlet extends HttpServlet {
 
         request.setAttribute("selectedMovie", selectedMovie);
         request.setAttribute("movieActors", movieActors);
+
+        List<Object[]> allReactions = reactionMovieDAO.getReactionDetailsForMovie(movieId);
+        request.setAttribute("allReactions", allReactions);
 
         request.getRequestDispatcher("/movie-details.jsp").forward(request, response);
     }
