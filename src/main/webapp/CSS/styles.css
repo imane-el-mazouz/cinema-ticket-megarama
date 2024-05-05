@@ -1,3 +1,46 @@
+/*style actors secction*/
+.container-actors{
+    margin: 5%;
+}
+.single-box {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ffffff57;
+    text-align: center;
+}
+.info-area {
+    padding: 0 20px 45px;
+    font-size: larger;
+}
+.img-area {
+    overflow: hidden;
+    padding: 15px 0 15px;
+}
+.img-area img {
+    margin: 0 auto;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    min-width: 200px
+}
+
+.move-animation {
+    position: relative;
+    -webkit-animation: move-animation 2s ease-in-out infinite;
+    animation: move-animation 2s ease-in-out infinite;
+}
+@-webkit-keyframes move-animation {
+    0% {
+        top: 3px;
+    }
+    50% {
+        top: -3px;
+    }
+    100% {
+        top: 3px;
+    }
+}
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .container-details {
     max-width: 800px;
     margin: 10% auto;
@@ -1015,7 +1058,6 @@ body.active { overflow: hidden; }
 \*-----------------------------------*/
 
 .movie-detail {
-    background: url("../images/movie-detail-bg.png") no-repeat;
     background-size: cover;
     background-position: center;
     padding-top: 160px;
