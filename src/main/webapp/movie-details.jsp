@@ -6,6 +6,7 @@
     <title>Megarama Béni Mellal</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style><%@include file ="./CSS/styles.css"%></style>
@@ -80,7 +81,7 @@
 </header>
 <main>
     <article>
-        <section class="movie-detail">
+        <section class="movie-detail" style="background: url(${selectedMovie.getBgImgUrl()}) no-repeat;">
             <div class="container">
                 <figure class="movie-detail-banner">
                     <img src="${selectedMovie.getImgUrl()}" alt="${selectedMovie.getTitle()} poster">
@@ -111,10 +112,52 @@
                 </div>
             </div>
         </section>
+        <div class="container-actors">
+            <div class="team-slider owl-carousel">
+                <c:forEach var="actor" items="${movieActors}">
+                    <div class="single-box text-center">
+                        <div class="img-area"><img alt="" class="img-fluid move-animation" src="${actor.getActorPhotoUrl()}"></div>
+                        <div class="info-area">
+                            <h4>${actor.getActorName()}</h4>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </article>
 </main>
 <script src="JS/script.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+    $('.team-slider').owlCarousel({
+        loop: true,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        smartSpeed: 450,
+        margin: 20,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            991: {
+                items: 3
+            },
+            1200: {
+                items: 4
+            },
+            1920: {
+                items: 5
+            }
+        }
+    });
+</script>
 </body>
 </html>

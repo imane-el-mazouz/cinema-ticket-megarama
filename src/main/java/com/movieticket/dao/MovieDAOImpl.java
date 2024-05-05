@@ -39,7 +39,7 @@ public class MovieDAOImpl implements MovieDAO {
     public List<Movie> getRatingMovies(){
         List<Movie> movies = new ArrayList<>();
         try (Session session = factory.openSession()) {
-            Query query = session.createQuery("FROM Movie WHERE rating > 8 ORDER BY rating DESC");
+            Query query = session.createQuery("FROM Movie WHERE rating > 4 ORDER BY rating DESC");
             movies = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

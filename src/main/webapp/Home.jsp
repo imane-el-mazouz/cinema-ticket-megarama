@@ -14,6 +14,101 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        #con {
+            padding: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            margin-top: 70px;
+
+        }
+
+
+        .cinema-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.07);
+            animation: shadow-pulse 2s infinite alternate;
+
+        }
+
+        .discount-button {
+            background-color: #E2D703FF;
+            color: #000;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .discount-button:hover {
+            background-color: #E2D703FF;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #E2D703FF;
+        }
+
+        .card p {
+            font-size: 14px;
+        }
+        .movie-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shadow-pulse {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.07);
+            }
+            to {
+                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+</style>
 </head>
 
 <body id="#top">
@@ -93,9 +188,40 @@
         </nav>
     </div>
 </header>
-<main>
+<div style="padding:20px;margin-top:200px;background-color:#f1f1f1;">
+    <div style="margin-top: 50px; padding: 20px; background-color: #ffffff; border-radius: 10px;">
+        <h2 style="text-align: center; font-size: 36px; font-weight: bold;color:#E2D703FF ">Welcome to Megarama Cinema</h2>
+        <p style="text-align: center; font-size: 18px;">At Megarama Cinema, we are dedicated to providing our customers with an exceptional movie-watching experience. Our state-of-the-art facilities, comfortable seating, and diverse selection of films ensure that every visit to Megarama is memorable. Whether you're a fan of action, comedy, drama, or romance, there's something for everyone at Megarama Cinema. Come join us and immerse yourself in the magic of cinema!</p>
+    </div>
+    <div class="container"id="con">
+        <div style="display: flex; justify-content: center;">
+            <div style="flex: 1;">
+                <iframe class="video" width="1200" height="500" src="https://www.youtube.com/embed/YoHD9XEInc0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;display :flex ;justify-content: center">
+            <button class="discount-button">Get 10% off today - Claim Now!</button>
+        </div>
+    </div>
+    <h2 style="text-align: center; margin-top: 20px;font-size: 26px;font-weight: bold;color: black;font-size: 36px;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.07);animation: shadow-pulse 2s infinite alternate;
 
-</main>
+">Coming soon</h2>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div class="card">
+            <img src="images/movie-1.png" alt="Movie Title 1" class="movie-image">
+            <h2>SONIC</h2>
+        </div>
+        <div class="card">
+            <img src="images/movie-2.png" alt="Movie Title 2" class="movie-image">
+            <h2>MORBUIS</h2>
+        </div>
+        <div class="card">
+            <img src="images/movie-6.png" alt="Movie Title 3" class="movie-image">
+            <h2>UNCHARTED</h2>
+        </div>
+    </div>
+</div>
+
 <!--
   - #FOOTER
 -->
