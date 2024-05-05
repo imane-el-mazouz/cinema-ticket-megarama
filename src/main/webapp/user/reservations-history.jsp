@@ -7,16 +7,17 @@
       - custom css link
     -->
     <style><%@include file ="../CSS/styles.css"%></style>
-    <link rel="stylesheet" href="CSS/styles.css">    <!--
+    <link rel="stylesheet" href="../CSS/styles.css">    <!--
       - google font link
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body id="#top">
-
+<% String successMessage = (String) request.getAttribute("successMessage"); %>
 <!--
   - #HEADER
 -->
@@ -89,19 +90,70 @@
         </nav>
     </div>
 </header>
-<main CLASS="container-details">
-    <h2 class="h2 section-title" style="margin-bottom: 5%">My Reservations</h2>
-
+<main style="margin-top: 12%;">
+    <h2 class="h2 section-title" style="margin-bottom: 4%">My Reservations</h2>
     <c:choose>
-        <c:when test="${not empty userReservations}">
-            <c:forEach var="reservation" items="${userReservations}">
-                <div class="card-details">
-                    <h3>Reservation ID: ${reservation.reservationId}</h3>
-                    <p><strong>User ID:</strong> ${reservation.userId}</p>
-                    <p><strong>Movie ID:</strong> ${reservation.movieId}</p>
-                    <p><strong>Total Price:</strong> ${reservation.priceTotal}</p>
-                </div>
-            </c:forEach>
+        <c:when test="${not empty reservationDetails}">
+            <div class="card-my-reservation">
+                <c:forEach var="reservationDetail" items="${reservationDetails}">
+                    <div class="ticket" style="margin-bottom: 1rem;">
+                        <div class="left">
+                            <div class="image" style="background-image: url(${reservationDetail[2]});">
+                                <p class="admit-one">
+                                    <span>ADMIT ONE</span>
+                                    <span>ADMIT ONE</span>
+                                    <span>ADMIT ONE</span>
+                                </p>
+                                <div class="ticket-number">
+                                    <p>
+                                        #${reservationDetail[0]}${reservationDetail[14]}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="ticket-info">
+                                <p class="date">
+                                    <span>${reservationDetail[13]}</span>
+                                    <span class="june-29"><i class="far fa-smile"></i></span>
+                                    <span>${reservationDetail[14]}</span>
+                                </p>
+                                <div class="show-name">
+                                    <h3>${reservationDetail[4]}</h3>
+                                </div>
+                                <div class="time">
+                                    <p>Your Seat</p>
+                                    <p>${reservationDetail[17]}</p>
+                                </div>
+                                <p class="location">
+                                    <span class="separator"><i class="far fa-smile"></i></span>
+                                    <span class="separator">Enjoy</span>
+                                    <span class="separator"><i class="far fa-smile"></i></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <p class="admit-one">
+                                <span>ADMIT ONE</span>
+                                <span>ADMIT ONE</span>
+                                <span>ADMIT ONE</span>
+                            </p>
+                            <div class="right-info-container">
+                                <div class="show-name">
+                                    <h1>${reservationDetail[4]}</h1>
+                                </div>
+                                <div class="time">
+                                    <p>${reservationDetail[17]}</p>
+                                </div>
+                                <div class="barcode">
+                                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+                                </div>
+                                <p class="ticket-number">
+                                    #${reservationDetail[0]}${reservationDetail[14]}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </c:when>
         <c:otherwise>
             <div class="no-reservation">
@@ -181,6 +233,11 @@
 -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+<script>
+    <%-- Affichage de l'alerte de succès --%>
+    <%if (successMessage != null && !successMessage.isEmpty()) {%>
+    alert("<%=successMessage%>");
+    <%}%>
+</script>
 </body>
 </html>

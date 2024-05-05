@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style><%@include file ="../CSS/styles.css"%></style>
 </head>
-<% String successMessage = (String) request.getAttribute("successMessage"); %>
 <header class="header" data-header>
     <div class="container">
         <div class="overlay" data-overlay></div>
@@ -129,12 +128,7 @@
         </section>
     </article>
 </main>
-<script>
-    <%-- Affichage de l'alerte de succès --%>
-    <%if (successMessage != null && !successMessage.isEmpty()) {%>
-    alert("<%=successMessage%>");
-    <%}%>
-</script>
+
 <script src="../JS/script.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

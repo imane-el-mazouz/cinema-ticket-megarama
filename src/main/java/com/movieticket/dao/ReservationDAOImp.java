@@ -52,21 +52,21 @@ public class ReservationDAOImp implements ReservationDAO {
 
 
 
-    @Override
-    public List<Reservation> getPreviousReservations(User userId) {
-        List<Reservation> reservations = new ArrayList<>();
-
+    public List<Object[]> getReservationDetails(int userId) {
         Session session = factory.openSession();
         Transaction transaction = null;
+        List<Object[]> results = null;
+
         try {
             transaction = session.beginTransaction();
+            String sql = "SELECT r.reservation_id, m.*, s.* FROM reservations r " +
+                    "JOIN movies m ON r.movie_id = m.movie_id " +
+                    "JOIN available_seats s ON r.seat_id = s.available_seat_id " +
+                    "WHERE r.user_id = :userId";
 
-            String hql = "SELECT r FROM Reservation r JOIN FETCH r.seat WHERE r.userId = :userId";
-            Query query = session.createQuery(hql);
-            query.setParameter("userId", userId);
-            List<Reservation> results = query.getResultList();
-            reservations.addAll(results);
-
+            Query query = session.createNativeQuery(sql)
+                    .setParameter("userId", userId);
+            results = query.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -77,9 +77,8 @@ public class ReservationDAOImp implements ReservationDAO {
             session.close();
         }
 
-        return reservations;
+        return results;
     }
-
 
 
 }

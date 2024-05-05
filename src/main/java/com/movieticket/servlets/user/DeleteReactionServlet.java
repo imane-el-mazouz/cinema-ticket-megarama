@@ -40,23 +40,12 @@ public class DeleteReactionServlet extends HttpServlet {
 
         try {
             int reactionMovieId = Integer.parseInt(request.getParameter("reactionMovieId"));
+            int movieId = Integer.parseInt(request.getParameter("movieId"));
             HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("userID");
-            User user = userDAO.getUserById(userId);
-            int movieId = Integer.parseInt(request.getParameter("movieId"));
-            Movie movie = movieDAO.getMovieById(movieId);
-            int rating = Integer.parseInt(request.getParameter("rating"));
-            String comment = request.getParameter("comment");
 
-            ReactionMovie reactionMovie = new ReactionMovie();
-            reactionMovie.setReactionMovieId(reactionMovieId);
-            reactionMovie.setUser(user);
-            reactionMovie.setMovie(movie);
-            reactionMovie.setRating(rating);
-            reactionMovie.setComment(comment);
-
-            reactionMovieDAO.addReactionMovie(reactionMovie);
-            response.sendRedirect(request.getContextPath() + "/movie-details");
+            reactionMovieDAO.deleteReactionMovie(reactionMovieId);
+            response.sendRedirect(request.getContextPath() + "/details?movieId=" + request.getParameter("movieId"));
         } catch (NumberFormatException | NullPointerException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add reaction movie.");
