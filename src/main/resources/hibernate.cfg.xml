@@ -9,7 +9,7 @@
 
         <property name = "hibernate.connection.username">imane</property>
 
-        <property name = "hibernate.connection.password">1234</property>
+        <property name = "hibernate.connection.password"></property>
 
         <property name = "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
