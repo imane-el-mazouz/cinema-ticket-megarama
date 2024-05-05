@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="47f214d1-859f-4c81-b7a1-f5de310e98eb">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="cinema_ticket_megarama@localhost" uuid="6598ab7c-fef0-478d-9b31-8821ec891646">
+    <data-source source="LOCAL" name="cinema_ticket_megarama@localhost" uuid="81b2e2e1-92f9-4cff-a9ea-30acc7ba0191">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
@@ -26,13 +13,13 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="dc8fb0bf-deae-41eb-8780-414207fee996">
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="79cb48fb-0145-48e1-9ec0-2d6b82e6ee69">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate
 
-C:/Users/PCPACK/OneDrive/Desktop/save verion/cinema-ticket-megarama/src/main/resources/hibernate.cfg.xml</remarks>
+C:/Users/Dell PC/Desktop/megarama part 2/cinema-ticket-megarama/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/cinema_ticket_megarama?createDatabaseIfNotExist=true</jdbc-url>
       <jdbc-additional-properties>
@@ -42,15 +29,16 @@ C:/Users/PCPACK/OneDrive/Desktop/save verion/cinema-ticket-megarama/src/main/res
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="8cc3391c-6a08-464f-9c09-93e5e80c966e">
+    <data-source source="LOCAL" name="cinema_ticket_megarama@localhost [2]" uuid="c1caaa96-70d1-4622-bcb2-2f90b23fdd61">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-C:/Users/PCPACK/OneDrive/Desktop/save verion/cinema-ticket-megarama/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/cinema_ticket_megarama?createDatabaseIfNotExist=true</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/cinema_ticket_megarama</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
