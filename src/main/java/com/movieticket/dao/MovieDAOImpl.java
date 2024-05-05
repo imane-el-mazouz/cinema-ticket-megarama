@@ -109,6 +109,27 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
+    public List<Movie> getRecommendedMovies() {
+        List<Movie> recommendedMovies = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            String sql = "SELECT m.* " +
+                    "FROM movies m " +
+                    "JOIN (SELECT movie_id, COUNT(*) AS reservation_count " +
+                    "      FROM reservations " +
+                    "      GROUP BY movie_id " +
+                    "      HAVING COUNT(*) > 3) AS r " +
+                    "ON m.movie_id = r.movie_id " +
+                    "LIMIT 6";
+            Query query = session.createNativeQuery(sql, Movie.class);
+            recommendedMovies = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recommendedMovies;
+    }
+
+
+    @Override
     public void addMovie(Movie movie){
         Transaction transaction = null;
         try (Session session = factory.openSession()) {

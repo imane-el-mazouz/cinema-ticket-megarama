@@ -99,7 +99,7 @@
             <div class="container">
                 <h2 class="h2 section-title">Top Rated Movies</h2>
                 <ul class="movies-list">
-                    <c:forEach var="movie" items="${ratingMovies}">
+                    <c:forEach var="movie" items="${getRecommendedMovies}">
                         <li>
                             <div class="movie-card">
                                 <a href="${pageContext.request.contextPath}/details?movieId=${movie.getMovieId()}">
