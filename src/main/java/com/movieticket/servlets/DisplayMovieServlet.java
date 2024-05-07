@@ -23,8 +23,12 @@ public class DisplayMovieServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Movie> getRecommendedMovies = movieDAO.getRatingMovies();
+
+        List<Movie> getRecommendedMovies = movieDAO.getRecommendedMovies();
         request.setAttribute("getRecommendedMovies", getRecommendedMovies);
+
+        List<Movie> getTopRatedMovie = movieDAO.getRatingMovies();
+        request.setAttribute("getTopRatedMovie", getTopRatedMovie);
 
         List<Movie> getAllMovies = movieDAO.getAllMovies();
         request.setAttribute("getAllMovies", getAllMovies);

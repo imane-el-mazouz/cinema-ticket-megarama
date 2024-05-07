@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <link rel="stylesheet" href="CSS/card.css">
     <style>
         /* Style pour le bouton Payer */
         .butn {
@@ -46,17 +46,10 @@
             <img src="images/logo.png" height="50px" alt="Cinema-TV">
         </a>
         <div class="header-actions">
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="showPanier()"><i class="fas fa-shopping-cart"></i> Panier</a></li>
-                </ul>
-            </nav>
             <button class="search-btn">
                 <ion-icon name="search-outline"></ion-icon>
             </button>
             <button class="btn btn-primary"><a href="login">Sign In</a> </button>
-            <button class="btn btn-primary"><a href="signup">Sign Up</a> </button>
-
         </div>
         <button class="menu-open-btn" data-menu-open-btn>
             <ion-icon name="reorder-two"></ion-icon>
@@ -72,13 +65,13 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="movies" class="navbar-link">Movies</a>
-                </li>
-                <li>
-                    <a href="user/reservations" class="navbar-link">Reserve Ticket</a>
+                    <a href="${pageContext.request.contextPath}/" class="navbar-link">Movies</a>
                 </li>
                 <li>
                     <a href="user/reservations" class="navbar-link">All Reservation</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showPanier()" class="navbar-link">cart</a>
                 </li>
             </ul>
 
@@ -115,11 +108,38 @@
 <main>
     <article>
         <!--
-          - #Rating MOVIE
-        -->
+        - #HERO
+      -->
+
+        <section class="hero" style="background: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAyL2xhdXJhc3RlZmFubzI2Nl9jbG9zZS11cF9zaG90X3Bob3RvZ3JhcGh5X29mX2NpbmVtYV90aGVhdGVyX3JlYV80NTA2NzkxZS04ZGI5LTQ1OTUtODdjYS1lNmNmNzM2NTRiOTVfMS5qcGc.jpg) no-repeat;  background-size: cover;background-position: center;min-height: 750px;height: 100vh;max-height: 1000px;display: flex;justify-content: flex-start;align-items: center;padding-block: var(--section-padding);">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <p class="hero-subtitle">Megarama Cinema</p>
+
+                    <h1 class="h1 hero-title">
+                        Best <strong>Movie</strong>, TVs Shows, & More.
+                    </h1>
+
+                    <button class="btn btn-primary">
+                        <ion-icon name="play"></ion-icon>
+
+                        <span>Watch now</span>
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--
+        - #UPCOMING
+      -->
+
         <section class="top-rated">
             <div class="container">
-                <h2 class="h2 section-title">Top Rated Movies</h2>
+                <h2 class="h2 section-title">Recommended Movies</h2>
                 <ul class="movies-list">
                     <c:forEach var="movie" items="${getRecommendedMovies}">
                         <li>
@@ -135,6 +155,7 @@
                                         <h3 class="card-title">${movie.getTitle()}</h3>
                                     </a>
                                     <div class="badge">${movie.getGenre()} </div>
+
                                 </div>
 
                                 <div class="card-meta">
@@ -142,17 +163,66 @@
                                     <div class="duration">
                                         <ion-icon name="time-outline"></ion-icon>
 
-                                        <time datetime="PT122M">122 min</time>
+                                        <time datetime="${movie.getDuration()}">${movie.getDuration()}</time>
                                     </div>
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
                                         <data>${movie.getRating()}</data>
                                     </div>
+                                    <form action="${pageContext.request.contextPath}/user/panier" method="post">
+                                            <button class="rating" type="submit" name="movieId" value="${movie.getMovieId()}"><ion-icon name="bookmark"></ion-icon></button>
+                                    </form>
                                 </div>
-                                <form action="${pageContext.request.contextPath}/panier" method="post">
-                                <button class="butn" type="submit" name="movieId" value="${movie.getMovieId()}">Ajouter au Panier</button>
-                            </form>
+
+
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </section>
+
+        <!--
+          - #Rating MOVIE
+        -->
+        <section class="top-rated">
+            <div class="container">
+                <h2 class="h2 section-title">Top Rated Movies</h2>
+                <ul class="movies-list">
+                    <c:forEach var="movie" items="${getTopRatedMovie}">
+                        <li>
+                            <div class="movie-card">
+                                <a href="${pageContext.request.contextPath}/details?movieId=${movie.getMovieId()}">
+                                    <figure class="card-banner">
+                                        <img src="${movie.getImgUrl()}" alt="${movie.getTitle()}">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="${pageContext.request.contextPath}/details?movieId=${movie.getMovieId()}">
+                                        <h3 class="card-title">${movie.getTitle()}</h3>
+                                    </a>
+                                    <div class="badge">${movie.getGenre()} </div>
+
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">${movie.getPrice()}$</div>
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="${movie.getDuration()}">${movie.getDuration()}</time>
+                                    </div>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>${movie.getRating()}</data>
+                                    </div>
+                                    <form action="${pageContext.request.contextPath}/user/panier" method="post">
+                                        <button class="rating" type="submit" name="movieId" value="${movie.getMovieId()}"><ion-icon name="bookmark"></ion-icon></button>
+                                    </form>
+                                </div>
 
                             </div>
                         </li>
@@ -177,12 +247,14 @@
                                 </a>
                                 <div class="title-wrapper">
                                     <a href="${pageContext.request.contextPath}/details?movieId=${movie.getMovieId()}">
-                                        <h3 class="card-title">${movie.getTitle()} </h3>
+                                        <h3 class="card-title">${movie.getTitle()}</h3>
                                     </a>
                                     <div class="badge">${movie.getGenre()} </div>
+
                                 </div>
+
                                 <div class="card-meta">
-                                    <div class="badge badge-outline">$${movie.getPrice()}</div>
+                                    <div class="badge badge-outline">${movie.getPrice()}$</div>
                                     <div class="duration">
                                         <ion-icon name="time-outline"></ion-icon>
 
@@ -190,8 +262,12 @@
                                     </div>
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
+
                                         <data>${movie.getRating()}</data>
                                     </div>
+                                    <form action="${pageContext.request.contextPath}/user/panier" method="post">
+                                        <button class="rating" type="submit" name="movieId" value="${movie.getMovieId()}"><ion-icon name="bookmark"></ion-icon></button>
+                                    </form>
                                 </div>
                             </div>
                         </li>
@@ -268,39 +344,34 @@
         <span class="close" onclick="closeDeleteForm()">&times;</span>
         <h2>Panier</h2>
         <div id="panier-content" class="panier-content"></div>
-        <b action="${pageContext.request.contextPath}/Payer" method="post">
-        </b>
-            <div class="details-produit">
+        <form action="${pageContext.request.contextPath}/Payer" method="post">
 
+            <div class="details-produit">
                 <table>
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Title</th>
                         <th>Genre</th>
-                        <th>Show date</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th>mohamed</th>
-                        <th>med</th>
-                        <th>2020</th>
-                    </tr>
-
+                    <c:forEach var="movie" items="${moviesCard}">
+                        <tr>
+                            <td>${movie.movieId}</td>
+                            <td>${movie.title}</td>
+                            <td>${movie.genre}</td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
-                <div >
-                    <h3>Totale : </h3>
-
+                <div>
                     <button>Payer</button>
                 </div>
-
-
-
             </div>
+        </form>
     </div>
 </div>
-
             <script>
                 function showPanier() {
                     //document.getElementById('idDeleteCategorie').value = categorieId;

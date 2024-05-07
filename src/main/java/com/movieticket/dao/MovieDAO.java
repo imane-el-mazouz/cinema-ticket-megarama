@@ -12,6 +12,7 @@ public interface MovieDAO {
     void addMovie(Movie movie);
     void deleteMovie(Movie movieId);
     int getPrice(Movie movieId);
+    void updateMovieRating(int movieId);
     String getName(Movie movieId);
     List<Movie> searchMovie(String title);
     List<Movie> getRecommendedMovies();

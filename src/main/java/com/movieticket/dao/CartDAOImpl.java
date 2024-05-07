@@ -4,6 +4,7 @@ import com.Connection.HibernateConf;
 import com.movieticket.model.Cart;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 
 public class CartDAOImpl implements CartDAO {
@@ -11,10 +12,11 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public void addToCart(Cart cart) {
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
-            session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(cart);
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

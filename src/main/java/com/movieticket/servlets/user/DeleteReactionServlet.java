@@ -33,24 +33,21 @@ public class DeleteReactionServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             int reactionMovieId = Integer.parseInt(request.getParameter("reactionMovieId"));
             int movieId = Integer.parseInt(request.getParameter("movieId"));
-            HttpSession session = request.getSession();
-            int userId = (int) session.getAttribute("userID");
-
             reactionMovieDAO.deleteReactionMovie(reactionMovieId);
+
             response.sendRedirect(request.getContextPath() + "/details?movieId=" + request.getParameter("movieId"));
         } catch (NumberFormatException | NullPointerException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Failed to add reaction movie.");
-            request.getRequestDispatcher("").forward(request, response);
         }
-        }
+    }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        doGet(request, response);
+    }
 }

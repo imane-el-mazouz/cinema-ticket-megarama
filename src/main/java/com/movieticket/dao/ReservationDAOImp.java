@@ -76,7 +76,6 @@ public class ReservationDAOImp implements ReservationDAO {
         } finally {
             session.close();
         }
-
         return results;
     }
 

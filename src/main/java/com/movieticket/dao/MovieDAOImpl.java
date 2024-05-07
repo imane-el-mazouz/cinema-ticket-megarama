@@ -25,6 +25,31 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
+    public void updateMovieRating(int movieId) {
+        try (Session session = HibernateConf.getFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            String sql = "UPDATE movies m " +
+                    "JOIN ( " +
+                    "    SELECT movie_id, AVG(rating) AS avg_rating " +
+                    "    FROM reaction_movie " +
+                    "    GROUP BY movie_id " +
+                    ") rm ON m.movie_id = rm.movie_id " +
+                    "SET m.rating = rm.avg_rating " +
+                    "WHERE m.movie_id = :movieId";
+
+            int rowCount = session.createNativeQuery(sql)
+                    .setParameter("movieId", movieId)
+                    .executeUpdate();
+            System.out.println("Rows affected: " + rowCount);
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Movie getMovieById(int movieId){
         Movie movie = null;
         try (Session session = factory.openSession()) {
@@ -39,7 +64,7 @@ public class MovieDAOImpl implements MovieDAO {
     public List<Movie> getRatingMovies(){
         List<Movie> movies = new ArrayList<>();
         try (Session session = factory.openSession()) {
-            Query query = session.createQuery("FROM Movie WHERE rating > 4 ORDER BY rating DESC");
+            Query query = session.createQuery("FROM Movie WHERE rating > 3 ORDER BY rating DESC");
             movies = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +118,6 @@ public class MovieDAOImpl implements MovieDAO {
         }
     }
 
-
     @Override
     public List<Movie> searchMovie(String title){
         List<Movie> movies = new ArrayList<>();
@@ -127,7 +151,6 @@ public class MovieDAOImpl implements MovieDAO {
         }
         return recommendedMovies;
     }
-
 
     @Override
     public void addMovie(Movie movie){

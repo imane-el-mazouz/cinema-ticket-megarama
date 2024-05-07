@@ -220,8 +220,6 @@
                 <ion-icon name="search-outline" style="font-size: 2vmax;"></ion-icon>
             </button>
             <button class="btn btn-primary"><a href="login">Sign In</a> </button>
-            <button class="btn btn-primary"><a href="signup">Sign Up</a> </button>
-
         </div>
         <button class="menu-open-btn" data-menu-open-btn>
             <ion-icon name="reorder-two"></ion-icon>
@@ -237,13 +235,13 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="movie" class="navbar-link">Movies</a>
-                </li>
-                <li>
-                    <a href="user/reservations" class="navbar-link">Reserve Ticket</a>
+                    <a href="${pageContext.request.contextPath}/" class="navbar-link">Movies</a>
                 </li>
                 <li>
                     <a href="user/reservations" class="navbar-link">All Reservation</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showPanier()" class="navbar-link">cart</a>
                 </li>
             </ul>
 
@@ -279,7 +277,7 @@
 </header>
 <main>
     <article>
-        <section class="movie-detail" style="background: url(${selectedMovie.getBgImgUrl()}) no-repeat;">
+        <section class="movie-detail" style="background-image: url(https://wallpapers.com/images/hd/plain-background-7h91softhxck36gv.jpg) ; background-size: cover;background-position: center;padding-top: 160px;">
             <div class="container">
 
                 <figure class="movie-detail-banner">
@@ -292,7 +290,7 @@
 
                 </figure>
                 <div class="movie-detail-content">
-                    <p class="storyline" >Movie Details</p>
+                    <p class=" detail-subtitle" style="color: white">Movie Details</p>
                     <h1 class="h1 detail-title">
                         <strong>${selectedMovie.getTitle()}</strong>
                     </h1>
@@ -344,8 +342,15 @@
             </div>
 
         </section>
-        <div class="container-actors">
-            <div class="team-slider owl-carousel" style="width: 100%;  text-align: center; background: url(./images/service-bg.jpg) no-repeat;">
+
+        <div class="container-actors"  style="width: 100%;  text-align: center; background: url(./images/service-bg.jpg) no-repeat;">
+            <div class="title-wrapper">
+                <p class="section-subtitle">OUR</p>
+
+                <h2 class="h2 section-title">Movie's Actors</h2>
+            </div>
+            <div class="team-slider owl-carousel">
+
                 <c:forEach var="actor" items="${movieActors}">
                     <div style="color: #ffbf00;">
                         <div class="img-area"><img alt="" class="img-fluid move-animation" src="${actor.getActorPhotoUrl()}" style="border-radius: 50%; height: 200px !important; width: 200px !important; position: relative; left: 40px; top: -80px; object-fit: cover;"></div>
@@ -384,8 +389,7 @@
                 <c:if test="${not empty allReactions}">
                     <c:forEach var="reaction" items="${allReactions}">
                         <div class="review-card-comment">
-                            <div> <a href="${pageContext.request.contextPath}/user/deletReaction?reactionId=${reaction[2]}&&movieId=${reaction[0]}"><ion-icon name="trash"></ion-icon></a>
-                                </div>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between;">
                             <div class="header-content-comment">
                                 <div class="img-area-comment">
                                     <img alt="customer1" src="https://www.verbolabs.com/wp-content/uploads/2023/12/Person-6.webp">
@@ -394,6 +398,10 @@
                                     <h4>${reaction[4]}</h4>
                                     <p>${reaction[5]}</p>
                                 </div>
+                            </div>
+                            <div >
+                                <a style="color: black;" href="${pageContext.request.contextPath}/user/deletReaction?reactionMovieId=${reaction[2]}&movieId=${reaction[0]}"><ion-icon name="trash"></ion-icon></a>
+                            </div>
                             </div>
                             <div class="single-review-comment">
                                 <p>${reaction[3]}</p>

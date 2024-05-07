@@ -27,6 +27,8 @@ public class MovieDetailsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int movieId = Integer.parseInt(request.getParameter("movieId"));
+        movieDAO.updateMovieRating(movieId);
+
         Movie selectedMovie = movieDAO.getMovieById(movieId);
         List<MovieActor> movieActors = movieActorDAO.getActorsByMovieId(movieId);
 

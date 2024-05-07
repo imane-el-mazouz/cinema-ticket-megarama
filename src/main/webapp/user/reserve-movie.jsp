@@ -21,7 +21,6 @@
                 <ion-icon name="search-outline"></ion-icon>
             </button>
             <button class="btn btn-primary"><a href="login">Sign In</a> </button>
-            <button class="btn btn-primary"><a href="signup">Sign Up</a> </button>
 
         </div>
         <button class="menu-open-btn" data-menu-open-btn>
@@ -38,13 +37,13 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="movie" class="navbar-link">Movies</a>
+                    <a href="${pageContext.request.contextPath}/" class="navbar-link">Movies</a>
                 </li>
                 <li>
-                    <a href="user/reservations" class="navbar-link">Reserve Ticket</a>
+                    <a href="reservations" class="navbar-link">All Reservation</a>
                 </li>
                 <li>
-                    <a href="user/reservations" class="navbar-link">All Reservation</a>
+                    <a href="#" onclick="showPanier()" class="navbar-link">cart</a>
                 </li>
             </ul>
 
@@ -81,7 +80,7 @@
 <main>
     <article>
         <section class="movie-detail">
-            <div class="container">
+            <div class="container" style="background-image: url(https://wallpapers.com/images/hd/plain-background-7h91softhxck36gv.jpg) ; background-size: cover;background-position: center;padding-top: 160px;">
                 <div class="container" style="display: flex; flex-direction: column; gap: 5%;">
                     <h1 class="h1 detail-title">${selectedMovie.getTitle()}</h1>
                     <figure class="movie-detail-banner">
@@ -90,29 +89,29 @@
                 </div>
 
                 <div class="movie-detail-content">
-                    <form id="reservationForm" action="reserve" method="POST" style="color:white; margin-right: 5%;">
+                    <form id="reservationForm" action="reserve" method="POST" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 1rem; color:white; padding: 5%;">
                             <input type="hidden" name="userId" value="<%= request.getParameter("userId")%>"></input>
                             <input type="hidden" name="movieId" value="<%= request.getParameter("movieId") %>"></input>
-                        <div class="seating-container">
-                            <div class="screen"></div>
-
-                            <div class="row-reserve" style="display: flex; gap: 5%; flex-wrap: wrap">
+                        <div class="seating-container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 1rem;">
+                            <div class="seating-container" style="display: flex;flex-direction: column;align-items: center;perspective: 1000px;">
+                                <div class="screen"
+                                     style="margin-bottom: 1rem; background-color: black; width: 20rem; height: 15rem;  transform: rotateX(-45deg); box-shadow: 0 25px 25px rgba(255, 255, 255, 0.8);">
+                                    <iframe class="video" width="320" height="230" src="${selectedMovie.getBgImgUrl()}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="row-reserve" style="display: flex; gap: 5%; flex-wrap: wrap; align-items: center; justify-content: center;">
 
                                 <c:forEach var="seat" items="${availableSeats}" varStatus="loop">
                                     <div class="col-md-4">
                                         <c:choose>
                                             <c:when test="${seat.available}">
-                                                <label for="${seat.seatNumber}">
-                                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
-                                                    <input type="checkbox" name="selectedSeats" value="${seat.seatNumber}" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" >${seat.seatNumber}<img src="../images/GREYseat.png" alt="A1" width="50" height="40">
-                                                    </input>
+                                                <label for="${seat.seatNumber}" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 15px;">
+                                                    <input  type="checkbox" name="selectedSeats" value="${seat.seatNumber}" id="${seat.seatNumber}"  style="color: white; display: none; flex-direction: column; align-items: center;" >${seat.seatNumber}<img src="../images/GREYseat.png" alt="A1" width="50" height="40">
                                                 </label>
                                             </c:when>
                                             <c:otherwise>
-                                                <label for="${seat.seatNumber}">
-                                                    <div style="display: flex; flex-direction: column; align-items: center;"></div>
-                                                    <input type="checkbox" id="${seat.seatNumber}"  style="color: white; display: flex; flex-direction: column; align-items: center;" disabled>${seat.seatNumber}<img src="../images/READseat.png" alt="A1" width="50" height="40">
-                                                    </input>
+                                                <label for="${seat.seatNumber}" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 15px;">
+                                                    <input type="checkbox" id="${seat.seatNumber}"  style="color: white; display: none; flex-direction: column; align-items: center;" disabled>${seat.seatNumber}<img src="../images/READseat.png" alt="A1" width="50" height="40">
                                                 </label>
                                             </c:otherwise>
                                         </c:choose>
@@ -128,6 +127,24 @@
         </section>
     </article>
 </main>
+<script>
+    const checkboxes = document.querySelectorAll('input[name="selectedSeats"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', function() {
+            const label = this.parentElement;
+
+            const img = label.querySelector('img');
+
+            // Check if the checkbox is checked
+            if (this.checked) {
+                img.src = "../images/GREENseat.png";
+            } else {
+                img.src = "../images/GREYseat.png";
+            }
+        });
+    });
+</script>
 
 <script src="../JS/script.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

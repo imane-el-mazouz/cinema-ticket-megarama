@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: hsl(207, 19%, 11%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,7 +50,7 @@
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: hsl(57, 97%, 45%);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -62,7 +62,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: hsl(57, 97%, 45%);
         }
 
         .error-message {
@@ -74,7 +74,7 @@
         .signup-link {
             margin-top: 20px;
             text-decoration: none;
-            color: #4CAF50;
+            color: hsl(57, 97%, 45%);
             font-weight: bold;
         }
 

@@ -503,7 +503,7 @@ html {
     scroll-behavior: smooth;
 }
 
-body { background: var(--eerie-black); }
+body { background: var(--eerie-black);}
 
 body.active { overflow: hidden; }
 
@@ -885,16 +885,7 @@ body.active { overflow: hidden; }
 \*-----------------------------------*/
 
 .hero {
-    background: url("../images/hero-bg.jpg") no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 750px;
-    height: 100vh;
-    max-height: 1000px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-block: var(--section-padding);
+
 }
 
 .hero-content { margin-top: 60px; }
@@ -1843,8 +1834,6 @@ body.active { overflow: hidden; }
     /**
      * MOVIE DETAIL
      */
-
-    .movie-detail { padding-bottom: 200px; }
 
     .movie-detail .container {
         position: relative;

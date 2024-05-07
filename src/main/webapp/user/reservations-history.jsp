@@ -33,8 +33,6 @@
                 <ion-icon name="search-outline"></ion-icon>
             </button>
             <button class="btn btn-primary"><a href="login">Sign In</a> </button>
-            <button class="btn btn-primary"><a href="signup">Sign Up</a> </button>
-
         </div>
         <button class="menu-open-btn" data-menu-open-btn>
             <ion-icon name="reorder-two"></ion-icon>
@@ -50,13 +48,13 @@
             </div>
             <ul class="navbar-list">
                 <li>
-                    <a href="${pageContext.request.contextPath}/movie" class="navbar-link">Movies</a>
+                    <a href="${pageContext.request.contextPath}/" class="navbar-link">Movies</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/user/reserve" class="navbar-link">Reserve Ticket</a>
+                    <a href="#" class="navbar-link">All Reservation</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/user/reservations" class="navbar-link">All Reservation</a>
+                    <a href="#" onclick="showPanier()" class="navbar-link">cart</a>
                 </li>
             </ul>
 

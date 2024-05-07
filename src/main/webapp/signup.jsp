@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: hsl(207, 19%, 11%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,11 +63,11 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #4CAF50;
+            border-color: hsl(57, 97%, 45%);
         }
 
         .sign-up-button {
-            background-color: #4CAF50;
+            background-color: hsl(57, 97%, 45%);
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -79,7 +79,7 @@
         }
 
         .sign-up-button:hover {
-            background-color: #45a049;
+            background-color: hsl(57, 97%, 45%);
         }
 
         .sign-up-footer {
@@ -89,7 +89,7 @@
         }
 
         .sign-up-footer a {
-            color: #4CAF50;
+            color: hsl(57, 97%, 45%);
             text-decoration: none;
         }
 

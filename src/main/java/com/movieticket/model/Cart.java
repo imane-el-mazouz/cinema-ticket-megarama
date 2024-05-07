@@ -3,25 +3,27 @@ package com.movieticket.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private int cartId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
 
-    @Column(name = "movie_id")
-    private int movieId;
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movieId;
 
     // Constructors, getters, and setters
 
     public Cart() {
     }
 
-    public Cart(int userId, int movieId) {
+    public Cart(User userId, Movie movieId) {
         this.userId = userId;
         this.movieId = movieId;
     }
@@ -34,19 +36,19 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public int getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
-    public int getMovieId() {
+    public Movie getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieId(Movie movieId) {
         this.movieId = movieId;
     }
 }

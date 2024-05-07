@@ -70,6 +70,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>PanierServlet</servlet-name>
+        <servlet-class>com.movieticket.servlets.user.PanierServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PanierServlet</servlet-name>
+        <url-pattern>/user/panier</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AddMovieServlet</servlet-name>
         <servlet-class>com.movieticket.servlets.admin.AddMovieServlet</servlet-class>
     </servlet>
